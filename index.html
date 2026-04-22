@@ -1,0 +1,2326 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>Mind-Guard Asia</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap');
+
+        :root {
+            --bg: #0F1412;
+            --sf: #161D1A;
+            --cd: #1C2420;
+            --bdr: #28362E;
+            --bdr2: #32463C;
+            --ink: #E4EDE8;
+            --ink2: #9EBFB0;
+            --mt: #507060;
+            --tl: #30BE84;
+            --tld: #269C6C;
+            --tll: #0C2C1E;
+            --am: #E8A840;
+            --aml: #281E08;
+            --rd: #E04848;
+            --rdl: #280C0C;
+            --cr: #FF5050;
+            --bl: #60A8F0;
+            --bll: #0C1E38;
+            --pu: #A878E8;
+            --pul: #1C1030;
+            --go: #FFC832;
+            --gol: #1E1800;
+            --fh: 'DM Serif Display', Georgia, serif;
+            --fb: 'Outfit', 'Segoe UI', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            font-family: var(--fb);
+            background: var(--bg);
+            color: var(--ink);
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+        }
+
+        #app {
+            width: 100%;
+            height: 100%;
+            max-width: 440px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scr {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg);
+            transition: opacity .3s, transform .3s;
+        }
+
+        .scr.off {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(20px);
+        }
+
+        /* PRIVACY */
+        #sp {
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            background: radial-gradient(ellipse 120% 60% at 50% 0%, #183028, #0F1412);
+        }
+
+        .logo {
+            width: 72px;
+            height: 72px;
+            background: var(--tll);
+            border: 2px solid var(--tl);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin: 0 auto 1.1rem;
+            box-shadow: 0 0 40px rgba(48, 190, 132, .16);
+        }
+
+        .ph1 {
+            font-family: var(--fh);
+            font-size: 28px;
+            text-align: center;
+            line-height: 1.15;
+            margin-bottom: 5px;
+        }
+
+        .ph1 em {
+            font-style: italic;
+            color: var(--tl);
+        }
+
+        .psub {
+            font-size: 13px;
+            color: var(--ink2);
+            text-align: center;
+            max-width: 290px;
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+        }
+
+        .pcard {
+            width: 100%;
+            max-width: 360px;
+            background: var(--cd);
+            border: 1px solid var(--bdr);
+            border-radius: 16px;
+            padding: 3px 0;
+            margin-bottom: 1.4rem;
+        }
+
+        .pr {
+            display: flex;
+            align-items: flex-start;
+            gap: 11px;
+            padding: 11px 15px;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .pr:last-child {
+            border-bottom: none;
+        }
+
+        .pi {
+            width: 32px;
+            height: 32px;
+            background: var(--tll);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .pr h4 {
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .pr p {
+            font-size: 11.5px;
+            color: var(--ink2);
+            line-height: 1.6;
+        }
+
+        .bgo {
+            width: 100%;
+            max-width: 360px;
+            background: var(--tl);
+            color: #071810;
+            border: none;
+            border-radius: 13px;
+            padding: 14px;
+            font-family: var(--fb);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background .18s, transform .12s;
+        }
+
+        .bgo:hover {
+            background: var(--tld);
+        }
+
+        .bgo:active {
+            transform: scale(.97);
+        }
+
+        .skip {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--mt);
+            text-align: center;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* INTAKE */
+        #si {
+            align-items: stretch;
+            overflow-y: auto;
+        }
+
+        .itop {
+            background: radial-gradient(ellipse 120% 40% at 50% 0%, #183028, #0F1412);
+            padding: 1.4rem 1.5rem .9rem;
+            text-align: center;
+        }
+
+        .ih {
+            font-family: var(--fh);
+            font-size: 22px;
+            margin-bottom: 4px;
+        }
+
+        .isub {
+            font-size: 12.5px;
+            color: var(--ink2);
+            line-height: 1.7;
+            max-width: 290px;
+            margin: 0 auto;
+        }
+
+        .ibody {
+            padding: 1.1rem 1.4rem;
+        }
+
+        .fi {
+            margin-bottom: .9rem;
+        }
+
+        .fi label {
+            display: block;
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: .7px;
+            text-transform: uppercase;
+            color: var(--ink2);
+            margin-bottom: 5px;
+        }
+
+        .fi input,
+        .fi select {
+            width: 100%;
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 11px;
+            padding: 10px 13px;
+            font-family: var(--fb);
+            font-size: 14px;
+            color: var(--ink);
+            outline: none;
+            -webkit-appearance: none;
+            transition: border-color .2s;
+        }
+
+        .fi input::placeholder {
+            color: var(--mt);
+        }
+
+        .fi input:focus,
+        .fi select:focus {
+            border-color: var(--tl);
+        }
+
+        .fi select option {
+            background: #1C2420;
+        }
+
+        .g-row {
+            display: flex;
+            gap: 7px;
+        }
+
+        .g-opt {
+            flex: 1;
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 10px;
+            padding: 9px 6px;
+            font-size: 12.5px;
+            color: var(--ink2);
+            cursor: pointer;
+            text-align: center;
+            transition: all .15s;
+        }
+
+        .g-opt.on {
+            background: var(--tll);
+            border-color: var(--tl);
+            color: var(--tl);
+            font-weight: 600;
+        }
+
+        /* Occupation row — 2x2 grid */
+        .occ-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7px;
+        }
+
+        .o-opt {
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 10px;
+            padding: 10px 8px;
+            font-size: 12.5px;
+            color: var(--ink2);
+            cursor: pointer;
+            text-align: center;
+            transition: all .15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .o-opt.on {
+            background: var(--tll);
+            border-color: var(--tl);
+            color: var(--tl);
+            font-weight: 600;
+        }
+
+        .inote {
+            font-size: 11px;
+            color: var(--mt);
+            text-align: center;
+            margin-bottom: .9rem;
+            line-height: 1.6;
+        }
+
+        /* CHAT */
+        #sc {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tb {
+            background: var(--sf);
+            border-bottom: 1px solid var(--bdr);
+            padding: 11px 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .tl2 {
+            width: 34px;
+            height: 34px;
+            background: var(--tll);
+            border: 1.5px solid var(--tl);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .tn {
+            font-family: var(--fh);
+            font-size: 15px;
+        }
+
+        .ts {
+            font-size: 11px;
+            color: var(--tl);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .ts::before {
+            content: ’’;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--tl);
+            display: inline-block;
+        }
+
+        .tbg {
+            margin-left: auto;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 4px 9px;
+            border-radius: 9px;
+            border: 1px solid;
+            white-space: nowrap;
+            transition: all .4s;
+        }
+
+        .bok {
+            background: var(--tll);
+            color: var(--tl);
+            border-color: var(--tl);
+        }
+
+        .bam {
+            background: var(--aml);
+            color: var(--am);
+            border-color: var(--am);
+        }
+
+        .brd {
+            background: var(--rdl);
+            color: var(--rd);
+            border-color: var(--rd);
+        }
+
+        .bcr {
+            background: var(--rdl);
+            color: var(--cr);
+            border-color: var(--cr);
+            animation: blk 1.4s infinite;
+        }
+
+        @keyframes blk {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .5
+            }
+        }
+
+        .msgs {
+            flex: 1;
+            overflow-y: auto;
+            padding: 13px 13px 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .msgs::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .msgs::-webkit-scrollbar-thumb {
+            background: var(--bdr2);
+            border-radius: 2px;
+        }
+
+        .msg {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+        }
+
+        .msg.u {
+            flex-direction: row-reverse;
+        }
+
+        .av {
+            width: 26px;
+            height: 26px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .msg.b .av {
+            background: var(--tll);
+            border: 1px solid var(--tl);
+        }
+
+        .msg.u .av {
+            background: var(--bdr);
+        }
+
+        .bub {
+            max-width: 82%;
+            padding: 9px 12px;
+            border-radius: 14px;
+            font-size: 13.5px;
+            line-height: 1.65;
+            animation: pop .22s ease;
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: scale(.96) translateY(5px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .msg.b .bub {
+            background: var(--cd);
+            border: 1px solid var(--bdr);
+            border-bottom-left-radius: 3px;
+            color: var(--ink);
+        }
+
+        .msg.u .bub {
+            background: var(--tl);
+            color: #071810;
+            font-weight: 500;
+            border-bottom-right-radius: 3px;
+        }
+
+        .msg.cry .bub {
+            background: var(--rdl);
+            border: 1.5px solid var(--cr);
+        }
+
+        /* checkpoint bubble — special styling */
+        .msg.chk .bub {
+            background: rgba(232, 168, 64, .1);
+            border: 1.5px solid var(--am);
+            color: var(--ink);
+        }
+
+        .tb2 {
+            background: var(--cd);
+            border: 1px solid var(--bdr);
+            border-radius: 14px;
+            border-bottom-left-radius: 3px;
+            padding: 11px 13px;
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: var(--mt);
+            animation: td 1.1s infinite;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: .18s;
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: .36s;
+        }
+
+        @keyframes td {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0)
+            }
+
+            30% {
+                transform: translateY(-4px);
+                background: var(--tl);
+            }
+        }
+
+        #meter {
+            margin: 0 13px 3px;
+            background: var(--cd);
+            border: 1px solid var(--bdr);
+            border-radius: 10px;
+            padding: 8px 11px;
+            display: none;
+        }
+
+        .mt {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .ml {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+            color: var(--mt);
+        }
+
+        .mp {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .mb {
+            height: 4px;
+            background: var(--bdr);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .mf {
+            height: 100%;
+            border-radius: 2px;
+            transition: width .7s cubic-bezier(.4, 0, .2, 1), background .5s;
+            width: 0%;
+        }
+
+        .mc {
+            font-size: 10px;
+            color: var(--mt);
+            margin-top: 3px;
+        }
+
+        #chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 3px 13px 4px;
+        }
+
+        .chip {
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 16px;
+            padding: 5px 11px;
+            font-size: 12px;
+            color: var(--ink2);
+            cursor: pointer;
+            transition: all .14s;
+            white-space: nowrap;
+        }
+
+        .chip:hover,
+        .chip:active {
+            border-color: var(--tl);
+            color: var(--tl);
+            background: var(--tll);
+        }
+
+        /* Checkpoint chips — amber */
+        .chip.ckp {
+            border-color: var(--am);
+            color: var(--am);
+            background: rgba(232, 168, 64, .08);
+        }
+
+        .chip.ckp:hover {
+            background: var(--aml);
+        }
+
+        .ibar {
+            background: var(--sf);
+            border-top: 1px solid var(--bdr);
+            padding: 9px 11px;
+            display: flex;
+            gap: 8px;
+            align-items: flex-end;
+            flex-shrink: 0;
+            padding-bottom: max(9px, env(safe-area-inset-bottom));
+        }
+
+        #inp {
+            flex: 1;
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 11px;
+            padding: 9px 12px;
+            font-family: var(--fb);
+            font-size: 14px;
+            color: var(--ink);
+            resize: none;
+            min-height: 40px;
+            max-height: 100px;
+            outline: none;
+            line-height: 1.5;
+            transition: border-color .2s;
+            -webkit-appearance: none;
+        }
+
+        #inp::placeholder {
+            color: var(--mt);
+        }
+
+        #inp:focus {
+            border-color: var(--tl);
+        }
+
+        .sbtn {
+            width: 40px;
+            height: 40px;
+            background: var(--tl);
+            border: none;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background .18s, transform .1s;
+        }
+
+        .sbtn:hover {
+            background: var(--tld);
+        }
+
+        .sbtn:active {
+            transform: scale(.92);
+        }
+
+        .sbtn:disabled {
+            background: var(--bdr);
+            cursor: not-allowed;
+        }
+
+        .sbtn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* CARDS */
+        .cc {
+            border-radius: 11px;
+            padding: 11px 13px;
+            margin-top: 7px;
+        }
+
+        .ct {
+            background: rgba(48, 190, 132, .07);
+            border: 1px solid rgba(48, 190, 132, .27);
+        }
+
+        .ca {
+            background: rgba(232, 168, 64, .07);
+            border: 1px solid rgba(232, 168, 64, .27);
+        }
+
+        .cr2 {
+            background: rgba(224, 72, 72, .09);
+            border: 1px solid rgba(224, 72, 72, .30);
+        }
+
+        .cb {
+            background: rgba(96, 168, 240, .07);
+            border: 1px solid rgba(96, 168, 240, .30);
+        }
+
+        .cp {
+            background: rgba(168, 120, 232, .07);
+            border: 1px solid rgba(168, 120, 232, .30);
+        }
+
+        .cg {
+            background: rgba(255, 200, 50, .07);
+            border: 1px solid rgba(255, 200, 50, .30);
+        }
+
+        .ccttl {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            margin-bottom: 8px;
+        }
+
+        .ct .ccttl {
+            color: var(--tl);
+        }
+
+        .ca .ccttl {
+            color: var(--am);
+        }
+
+        .cr2 .ccttl {
+            color: var(--cr);
+        }
+
+        .cb .ccttl {
+            color: var(--bl);
+        }
+
+        .cp .ccttl {
+            color: var(--pu);
+        }
+
+        .cg .ccttl {
+            color: var(--go);
+        }
+
+        .cs {
+            display: flex;
+            gap: 7px;
+            align-items: flex-start;
+            font-size: 12px;
+            color: var(--ink2);
+            margin-bottom: 4px;
+            line-height: 1.55;
+        }
+
+        .cs:last-child {
+            margin-bottom: 0;
+        }
+
+        .cn {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8.5px;
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .hl {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 80, 80, .12);
+            font-size: 12px;
+        }
+
+        .hl:last-child {
+            border-bottom: none;
+        }
+
+        .hl .hn {
+            color: var(--ink2);
+            flex: 1;
+        }
+
+        .hl .hnum {
+            color: var(--cr);
+            font-weight: 700;
+        }
+
+        .rr2 {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(232, 168, 64, .12);
+            font-size: 12px;
+            color: var(--ink2);
+        }
+
+        .rr2:last-child {
+            border-bottom: none;
+        }
+
+        .rr2 strong {
+            color: var(--ink);
+        }
+
+        .rr2 .rn {
+            margin-left: auto;
+            color: var(--am);
+            font-weight: 600;
+            font-size: 11px;
+        }
+
+        .rrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(96, 168, 240, .1);
+            font-size: 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background .14s;
+        }
+
+        .rrow:last-child {
+            border-bottom: none;
+        }
+
+        .rrow:hover {
+            background: rgba(96, 168, 240, .05);
+        }
+
+        .rrow .ri {
+            font-size: 15px;
+            flex-shrink: 0;
+        }
+
+        .rrow .rbd {
+            flex: 1;
+        }
+
+        .rrow .rbn {
+            font-weight: 600;
+            color: var(--ink);
+            font-size: 12px;
+        }
+
+        .rrow .rbd2 {
+            font-size: 11px;
+            color: var(--ink2);
+        }
+
+        .rrow .rl {
+            font-size: 10px;
+            color: var(--bl);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .act-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 7px;
+        }
+
+        .ac {
+            background: rgba(48, 190, 132, .08);
+            border: 1px solid rgba(48, 190, 132, .22);
+            border-radius: 13px;
+            padding: 3px 10px;
+            font-size: 11.5px;
+            color: var(--tl);
+        }
+
+        /* VISUAL EXERCISE / BREATHING GUIDES */
+        .vis-card {
+            background: var(--cd);
+            border: 1px solid var(--bdr);
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-top: 7px;
+        }
+
+        .vis-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+            color: var(--tl);
+            margin-bottom: 8px;
+        }
+
+        .vis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .vis-item {
+            background: var(--bg);
+            border: 1px solid var(--bdr);
+            border-radius: 9px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .vis-item svg {
+            display: block;
+            margin: 0 auto 5px;
+        }
+
+        .vis-item .vt {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .vis-item .vs {
+            font-size: 10px;
+            color: var(--ink2);
+            line-height: 1.5;
+        }
+
+        .vis-item .vd {
+            font-size: 10px;
+            color: var(--tl);
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        .vis-wide {
+            background: var(--bg);
+            border: 1px solid var(--bdr);
+            border-radius: 9px;
+            padding: 9px 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 5px;
+        }
+
+        .vis-wide svg {
+            flex-shrink: 0;
+        }
+
+        .vis-wide .vw-body h4 {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+
+        .vis-wide .vw-body p {
+            font-size: 11px;
+            color: var(--ink2);
+            line-height: 1.5;
+        }
+
+        .vis-wide .vw-body .vwd {
+            font-size: 10px;
+            color: var(--am);
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        /* SUMMARY */
+        #end-ov {
+            position: absolute;
+            inset: 0;
+            background: rgba(15, 20, 18, .97);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            z-index: 50;
+            overflow-y: auto;
+            padding: 2rem 1.4rem;
+        }
+
+        #end-ov.on {
+            display: flex;
+        }
+
+        .et {
+            text-align: center;
+            margin-bottom: 1.4rem;
+        }
+
+        .et .ei {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .et h2 {
+            font-family: var(--fh);
+            font-size: 23px;
+            margin-bottom: 5px;
+        }
+
+        .et p {
+            font-size: 13px;
+            color: var(--ink2);
+            line-height: 1.75;
+            max-width: 270px;
+            margin: 0 auto;
+        }
+
+        .sc2 {
+            width: 100%;
+            max-width: 360px;
+            background: var(--cd);
+            border: 1px solid var(--bdr);
+            border-radius: 15px;
+            padding: .95rem 1.05rem;
+            margin-bottom: .9rem;
+        }
+
+        .sc2 h3 {
+            font-size: 10.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+            color: var(--tl);
+            margin-bottom: 9px;
+        }
+
+        .srow {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(48, 190, 132, .1);
+            font-size: 12px;
+        }
+
+        .srow:last-child {
+            border-bottom: none;
+        }
+
+        .srow .sk {
+            color: var(--ink2);
+            min-width: 96px;
+            flex-shrink: 0;
+        }
+
+        .srow .sv {
+            color: var(--ink);
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .ri2 {
+            display: flex;
+            gap: 9px;
+            align-items: flex-start;
+            padding: 7px 0;
+            border-bottom: 1px solid var(--bdr);
+        }
+
+        .ri2:last-child {
+            border-bottom: none;
+        }
+
+        .ri2 .rii {
+            font-size: 17px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .ri2 h4 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .ri2 p {
+            font-size: 12px;
+            color: var(--ink2);
+            line-height: 1.6;
+        }
+
+        .bre {
+            background: var(--tl);
+            color: #071810;
+            border: none;
+            border-radius: 12px;
+            padding: 13px;
+            font-family: var(--fb);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            max-width: 360px;
+            margin-top: 4px;
+        }
+
+        /* TMC panel */
+        #tmc {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--sf);
+            border-top: 1.5px solid var(--bdr);
+            border-radius: 18px 18px 0 0;
+            padding: 1.1rem;
+            z-index: 30;
+            transform: translateY(100%);
+            transition: transform .3s cubic-bezier(.4, 0, .2, 1);
+            max-height: 72%;
+        }
+
+        #tmc.open {
+            transform: translateY(0);
+        }
+
+        .tmc-h {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 9px;
+        }
+
+        .tmc-h span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .tmc-h button {
+            width: 26px;
+            height: 26px;
+            background: var(--bdr);
+            border: none;
+            border-radius: 50%;
+            color: var(--ink2);
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .tmc-p {
+            font-size: 12.5px;
+            color: var(--ink2);
+            margin-bottom: 9px;
+            line-height: 1.65;
+        }
+
+        #tmc-a {
+            width: 100%;
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 11px;
+            padding: 10px 12px;
+            font-family: var(--fb);
+            font-size: 13.5px;
+            color: var(--ink);
+            resize: none;
+            height: 110px;
+            outline: none;
+            line-height: 1.6;
+            -webkit-appearance: none;
+        }
+
+        #tmc-a::placeholder {
+            color: var(--mt);
+        }
+
+        #tmc-a:focus {
+            border-color: var(--tl);
+        }
+
+        .tmc-row {
+            display: flex;
+            gap: 7px;
+            margin-top: 9px;
+        }
+
+        .tbtn {
+            flex: 1;
+            padding: 9px;
+            border-radius: 10px;
+            border: none;
+            font-family: var(--fb);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .tbtn.p {
+            background: var(--tl);
+            color: #071810;
+        }
+
+        .tbtn.s {
+            background: var(--cd);
+            color: var(--ink2);
+            border: 1px solid var(--bdr2);
+        }
+
+        .tmc-note {
+            font-size: 11px;
+            color: var(--mt);
+            text-align: center;
+            margin-top: 7px;
+        }
+
+        #toast {
+            position: fixed;
+            bottom: 88px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 18px;
+            padding: 7px 15px;
+            font-size: 12px;
+            color: var(--ink2);
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+            white-space: nowrap;
+            max-width: 88vw;
+        }
+
+        #toast.on {
+            opacity: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+
+        <!-- PRIVACY -->
+
+        <div class="scr" id="sp">
+            <div class="logo">🧠</div>
+            <h1 class="ph1">Mind-Guard <em>Asia</em></h1>
+            <p class="psub">A safe, private space to talk — stress, school, work, family, relationships, or anything
+                weighing on you.</p>
+            <div class="pcard">
+                <div class="pr">
+                    <div class="pi">🔒</div>
+                    <div>
+                        <h4>Completely anonymous</h4>
+                        <p>Nothing stored beyond this session. Closes cleanly when you leave.</p>
+                    </div>
+                </div>
+                <div class="pr">
+                    <div class="pi">🧒</div>
+                    <div>
+                        <h4>All ages welcome</h4>
+                        <p>Teens, adults, seniors — issues from school to retirement.</p>
+                    </div>
+                </div>
+                <div class="pr">
+                    <div class="pi">🏥</div>
+                    <div>
+                        <h4>Tells you when to see a doctor</h4>
+                        <p>No endless loops — clear guidance and a summary at the end.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="bgo" onclick="G('si')"><span>🌿</span> I understand — Continue</button>
+            <div class="skip" onclick="skipBack()">No thanks, exit</div>
+        </div>
+
+        <!-- INTAKE -->
+
+        <div class="scr off" id="si">
+            <div class="itop">
+                <div style="font-size:26px;margin-bottom:7px;">👋</div>
+                <h2 class="ih">Tell us a little about yourself</h2>
+                <p class="isub">Helps Mind-Guard give personalised support. All private — nothing stored.</p>
+            </div>
+            <div style="flex:1;overflow-y:auto;">
+                <div class="ibody">
+                    <div class="fi"><label>Your name or nickname (optional)</label><input id="fn" type="text"
+                            placeholder="e.g. Alex" maxlength="30" autocomplete="off"></div>
+                    <div class="fi"><label>Age</label><input id="fa" type="number" placeholder="e.g. 17 or 55" min="10"
+                            max="99"></div>
+                    <div class="fi"><label>Gender</label>
+                        <div class="g-row">
+                            <div class="g-opt" onclick="selG('female',this)">♀ Female</div>
+                            <div class="g-opt" onclick="selG('male',this)">♂ Male</div>
+                            <div class="g-opt" onclick="selG('other',this)">⚬ Other</div>
+                        </div>
+                    </div>
+                    <div class="fi"><label>I am a…</label>
+                        <div class="occ-grid">
+                            <div class="o-opt" onclick="selO('student',this)">🎓 Student</div>
+                            <div class="o-opt" onclick="selO('worker',this)">💼 Worker</div>
+                            <div class="o-opt" onclick="selO('retired',this)">🌅 Retired</div>
+                            <div class="o-opt" onclick="selO('other',this)">🌐 Other</div>
+                        </div>
+                    </div>
+                    <div class="fi"><label>How long have you felt this way?</label>
+                        <select id="fd">
+                            <option value="">Select…</option>
+                            <option value="today">Just today</option>
+                            <option value="days">A few days</option>
+                            <option value="week">About a week</option>
+                            <option value="weeks">2–4 weeks</option>
+                            <option value="months">More than a month</option>
+                            <option value="longer">Several months or longer</option>
+                        </select>
+                    </div>
+                    <p class="inote">* All fields optional. Age & occupation help personalise your support.</p>
+                    <button class="bgo" onclick="startChat()"><span>💬</span> Start my session</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CHAT -->
+
+        <div class="scr off" id="sc">
+            <div class="tb">
+                <div class="tl2">🧠</div>
+                <div>
+                    <div class="tn">Mind-Guard</div>
+                    <div class="ts" id="tstat">Online · Safe space</div>
+                </div>
+                <div class="tbg bok" id="tbg">Safe</div>
+            </div>
+            <div class="msgs" id="msgs"></div>
+            <div id="meter">
+                <div class="mt"><span class="ml">Stress Level</span><span class="mp" id="mp">–</span></div>
+                <div class="mb">
+                    <div class="mf" id="mf"></div>
+                </div>
+                <div class="mc" id="mc">–</div>
+            </div>
+            <div id="chips"></div>
+            <div class="ibar">
+                <textarea id="inp" placeholder="Type how you're feeling…" rows="1" onkeydown="onKey(event)"
+                    oninput="rsz(this)"></textarea>
+                <button class="sbtn" id="sbtn" onclick="send()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#071810" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13" />
+                        <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- TMC -->
+
+            <div id="tmc">
+                <div class="tmc-h"><span>📝 Tell Me More</span><button onclick="closeTMC()">✕</button></div>
+                <div class="tmc-p" id="tmc-p">Write freely — as much or as little as you want. No one else sees this.
+                </div>
+                <textarea id="tmc-a"
+                    placeholder="What's been happening, how long, who's involved, how it makes you feel…"></textarea>
+                <div class="tmc-row">
+                    <button class="tbtn s" onclick="closeTMC()">Cancel</button>
+                    <button class="tbtn p" onclick="submitTMC()">📤 Send to Mind-Guard</button>
+                </div>
+                <div class="tmc-note">Sent as your next message. Nothing stored permanently.</div>
+            </div>
+
+            <!-- SUMMARY -->
+
+            <div id="end-ov">
+                <div class="et">
+                    <div class="ei">🌱</div>
+                    <h2 id="et2">Session Complete</h2>
+                    <p id="ep">Your personalised summary and action plan.</p>
+                </div>
+                <div class="sc2">
+                    <h3>Your Profile</h3>
+                    <div id="s-prof"></div>
+                </div>
+                <div class="sc2">
+                    <h3>What Was Detected</h3>
+                    <div id="s-det"></div>
+                </div>
+                <div class="sc2">
+                    <h3>Your Action Plan</h3>
+                    <div id="s-rec"></div>
+                </div>
+                <button class="bre" onclick="restart()">Start a New Session</button>
+                <div style="height:1.5rem"></div>
+            </div>
+        </div>
+    </div>
+    <div id="toast"></div>
+
+    <script>
+        // ═══════════════════════════════════════
+        // MIND-GUARD ASIA v5
+        // Occupation · Anti-loop · SVG Visuals
+        // Relationship quotes · Senior guide
+        // ═══════════════════════════════════════
+
+        /* ── USER STATE ── */
+        let U = { name: '', age: 0, gender: '', occ: '', dur: '' }, selGender = '', selOcc = '';
+        let busy = false, turn = 0, lastLv = 'safe', lastInp = '';
+        let highT = 0, modT = 0, allCats = new Set();
+        let docGiven = false, checkpointShown = false, sessionDone = false;
+        let apiMessages = []; // conversation history sent to OpenAI
+        const _li = {};
+
+        /* ── KEYWORDS ── */
+        const KW = {
+            crisis: ["don't want to live", "dont want to live", "want to die", "wanna die", "kill myself", "end my life", "hurt myself", "self harm", "self-harm", "no reason to live", "better off without me", "want to disappear", "tired of living", "no point in living", "want to end it", "suicidal", "suicide", "wish i was dead", "can't go on", "not worth living", "end it all"],
+            physical: ["tired", "exhausted", "fatigue", "headache", "migraine", "stomach", "nausea", "can't sleep", "cant sleep", "insomnia", "no appetite", "chest tight", "heart racing", "palpitation", "dizzy", "body ache", "acid reflux", "shortness of breath", "weak", "body hurts", "feel heavy", "no energy", "burning out", "low energy", "trembling", "back pain", "neck pain", "muscle", "always sick", "unwell", "not well"],
+            academic: ["can't focus", "cant focus", "brain fog", "falling behind", "fail", "failing", "grades", "exam", "test", "school", "university", "study", "homework", "assignment", "no motivation", "academic pressure", "deadline", "struggling", "dropped out", "college", "gpa", "thesis", "teacher", "class", "lecture"],
+            social: ["feel alone", "alone", "lonely", "no friends", "nobody understands", "nobody cares", "avoiding people", "isolating", "invisible", "burden", "no one listens", "disconnected", "withdrawn", "left out", "feel unwanted", "rejected", "excluded", "ignored", "don't belong", "outsider"],
+            work: ["deadline", "workload", "boss", "manager", "overloaded", "overwhelmed", "work stress", "work pressure", "too much work", "can't keep up", "job", "overtime", "fired", "resign", "coworker", "performance", "overworked", "salary", "promotion", "office", "career", "unemployed", "laid off", "toxic workplace", "burnout"],
+            family: ["family", "parents", "mom", "dad", "mother", "father", "sibling", "brother", "sister", "expectations", "compared to", "letting family down", "family argument", "family fight", "disappointing family", "family stress", "home", "parent", "family issue", "family problem", "marriage", "divorce", "spouse", "husband", "wife", "in-law"],
+            teen: ["bully", "bullied", "bullying", "cyberbullying", "classmate", "school friend", "boyfriend", "girlfriend", "crush", "breakup", "broke up", "heartbreak", "dumped", "ghosted", "social media", "instagram", "tiktok", "hate comment", "body shaming", "peer pressure", "fitting in", "school drama", "excluded at school", "clique", "rumour", "rumor"],
+            relationship: ["relationship", "partner", "friend", "best friend", "trust", "betrayal", "friendship", "fight with friend", "argument with friend", "falling out", "misunderstanding", "distance", "lonely in relationship", "toxic friend", "toxic relationship", "unrequited", "one-sided", "jealousy", "communication", "growing apart", "missing someone", "attachment", "dependency", "love", "heartache", "longing"],
+            spiritual: ["lost", "empty", "meaningless", "no purpose", "why am i here", "god", "pray", "faith", "believe", "church", "mosque", "temple", "religion", "spiritual", "prayer", "soul", "inner peace", "nothing matters", "hopeless darkness", "forgive", "sin"]
+        };
+
+        /* ── ANTI-LOOP: checkpoint every 3 real turns ── */
+        function shouldCheckpoint() {
+            // Show checkpoint at turn 3, then again at turn 5, then force end at turn 7
+            if (sessionDone || checkpointShown) return false;
+            if (turn === 3 || turn === 5) return true;
+            return false;
+        }
+        function forceEnd() { return turn >= 7 && !sessionDone; }
+
+        /* ── SVG VISUAL GUIDES ── */
+        function svgBreath() {
+            return `<svg width="70" height="70" viewBox="0 0 70 70">
+<circle cx="35" cy="35" r="28" fill="none" stroke="#30BE84" stroke-width="2" opacity=".3"/>
+<circle cx="35" cy="35" r="20" fill="rgba(48,190,132,.1)" stroke="#30BE84" stroke-width="1.5"/>
+<text x="35" y="30" text-anchor="middle" font-size="18" fill="#30BE84">🫁</text>
+<text x="35" y="48" text-anchor="middle" font-size="9" fill="#9EBFB0" font-family="Outfit,sans-serif">breathe</text>
+<animateTransform attributeName="transform" attributeType="XML" type="scale" from="1 1 35 35" to="1.08 1.08 35 35" dur="4s" repeatCount="indefinite" additive="sum"/>
+</svg>`;
+        }
+        function svgMeditate() {
+            return `<svg width="70" height="70" viewBox="0 0 70 70">
+<ellipse cx="35" cy="56" rx="18" ry="5" fill="rgba(168,120,232,.15)"/>
+<!-- body -->
+<circle cx="35" cy="20" r="8" fill="#A878E8" opacity=".9"/>
+<!-- arms/legs seated -->
+<ellipse cx="35" cy="42" rx="16" ry="8" fill="#A878E8" opacity=".7"/>
+<line x1="22" y1="42" x2="15" y2="38" stroke="#A878E8" stroke-width="3" stroke-linecap="round"/>
+<line x1="48" y1="42" x2="55" y2="38" stroke="#A878E8" stroke-width="3" stroke-linecap="round"/>
+<!-- glow lines -->
+<line x1="35" y1="5" x2="35" y2="10" stroke="#FFC832" stroke-width="1.5" opacity=".6"/>
+<line x1="25" y1="8" x2="27" y2="12" stroke="#FFC832" stroke-width="1.5" opacity=".5"/>
+<line x1="45" y1="8" x2="43" y2="12" stroke="#FFC832" stroke-width="1.5" opacity=".5"/>
+</svg>`;
+        }
+        function svgWalk() {
+            return `<svg width="70" height="70" viewBox="0 0 70 70">
+<ellipse cx="35" cy="60" rx="20" ry="4" fill="rgba(232,168,64,.15)"/>
+<!-- head -->
+<circle cx="38" cy="14" r="7" fill="#E8A840" opacity=".9"/>
+<!-- body -->
+<line x1="38" y1="21" x2="36" y2="38" stroke="#E8A840" stroke-width="3" stroke-linecap="round"/>
+<!-- arms walk pose -->
+<line x1="36" y1="26" x2="26" y2="32" stroke="#E8A840" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="36" y1="26" x2="46" y2="22" stroke="#E8A840" stroke-width="2.5" stroke-linecap="round"/>
+<!-- legs stride -->
+<line x1="36" y1="38" x2="28" y2="52" stroke="#E8A840" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="36" y1="38" x2="44" y2="50" stroke="#E8A840" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="28" y1="52" x2="22" y2="58" stroke="#E8A840" stroke-width="2" stroke-linecap="round"/>
+<line x1="44" y1="50" x2="50" y2="56" stroke="#E8A840" stroke-width="2" stroke-linecap="round"/>
+</svg>`;
+        }
+        function svgStretch() {
+            return `<svg width="70" height="70" viewBox="0 0 70 70">
+<!-- mat -->
+<rect x="10" y="54" width="50" height="6" rx="3" fill="rgba(48,190,132,.2)"/>
+<!-- person lying -->
+<circle cx="20" cy="48" r="7" fill="#30BE84" opacity=".9"/>
+<line x1="20" y1="55" x2="20" y2="52" stroke="#30BE84" stroke-width="2.5" stroke-linecap="round"/>
+<!-- body horizontal -->
+<line x1="20" y1="48" x2="52" y2="48" stroke="#30BE84" stroke-width="3" stroke-linecap="round"/>
+<!-- legs up -->
+<line x1="52" y1="48" x2="52" y2="30" stroke="#30BE84" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="52" y1="48" x2="60" y2="30" stroke="#30BE84" stroke-width="2.5" stroke-linecap="round"/>
+<!-- arms overhead -->
+<line x1="20" y1="44" x2="10" y2="34" stroke="#30BE84" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="20" y1="44" x2="12" y2="38" stroke="#30BE84" stroke-width="2" stroke-linecap="round"/>
+</svg>`;
+        }
+        function svgChair() {
+            return `<svg width="70" height="70" viewBox="0 0 70 70">
+<!-- chair -->
+<rect x="15" y="35" width="40" height="4" rx="2" fill="rgba(96,168,240,.4)"/>
+<line x1="18" y1="39" x2="18" y2="60" stroke="#60A8F0" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+<line x1="52" y1="39" x2="52" y2="60" stroke="#60A8F0" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+<line x1="52" y1="20" x2="52" y2="36" stroke="#60A8F0" stroke-width="3" stroke-linecap="round" opacity=".5"/>
+<!-- person seated -->
+<circle cx="35" cy="22" r="7" fill="#60A8F0" opacity=".9"/>
+<line x1="35" y1="29" x2="35" y2="39" stroke="#60A8F0" stroke-width="3" stroke-linecap="round"/>
+<line x1="35" y1="33" x2="26" y2="38" stroke="#60A8F0" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="35" y1="33" x2="44" y2="38" stroke="#60A8F0" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="35" y1="39" x2="28" y2="55" stroke="#60A8F0" stroke-width="2.5" stroke-linecap="round"/>
+<line x1="35" y1="39" x2="42" y2="55" stroke="#60A8F0" stroke-width="2.5" stroke-linecap="round"/>
+</svg>`;
+        }
+
+        function cardVisual(isSenior) {
+            if (isSenior) {
+                return `<div class="vis-card"><div class="vis-title">🧘 Senior-Friendly Exercises — Visual Guide</div>
+<div class="vis-grid">
+<div class="vis-item">${svgBreath()}<div class="vt">Deep Breathing</div><div class="vs">Slow breath in — hold — slow breath out</div><div class="vd">5 min · Any time</div></div>
+<div class="vis-item">${svgChair()}<div class="vt">Seated Stretch</div><div class="vs">Sit tall, stretch arms up and side to side</div><div class="vd">10 min · Morning</div></div>
+<div class="vis-item">${svgWalk()}<div class="vt">Slow Walk</div><div class="vs">Flat surface, comfortable pace, with support if needed</div><div class="vd">15 min · After breakfast</div></div>
+<div class="vis-item">${svgMeditate()}<div class="vt">Quiet Meditation</div><div class="vs">Sit comfortably, close eyes, focus on breath</div><div class="vd">10 min · Any time</div></div>
+</div>
+<div class="vis-wide">${svgStretch()}<div class="vw-body"><h4>Gentle Floor Stretch</h4><p>Lie on a mat, raise legs slowly while breathing deeply. Keeps circulation healthy.</p><div class="vwd">⚠ Skip if you have joint or back issues. Ask your doctor first.</div></div></div>
+</div>`;
+            }
+            return `<div class="vis-card"><div class="vis-title">🫁 Breathing & Movement — Visual Guide</div>
+<div class="vis-grid">
+<div class="vis-item">${svgBreath()}<div class="vt">4-7-8 Breathing</div><div class="vs">Inhale 4s · Hold 7s · Exhale 8s · Repeat 4×</div><div class="vd">3 min · Works immediately</div></div>
+<div class="vis-item">${svgMeditate()}<div class="vt">Body Scan Meditation</div><div class="vs">Sit/lie still, focus attention from feet to head slowly</div><div class="vd">10 min · Before sleep</div></div>
+<div class="vis-item">${svgWalk()}<div class="vt">Brisk Walk</div><div class="vs">Outside, any pace, arms swinging — best in morning light</div><div class="vd">20 min · Daily</div></div>
+<div class="vis-item">${svgStretch()}<div class="vt">Stretching Routine</div><div class="vs">Full body stretch — neck, shoulders, back, legs</div><div class="vd">10 min · Morning/evening</div></div>
+</div></div>`;
+        }
+
+        /* ── RELATIONSHIP QUOTES CARD ── */
+        function cardRelationship(subtype) {
+            const quotes = {
+                general: [
+                    { q: "The most important relationship in your life is the one you have with yourself. Every other relationship is a reflection of it.", a: "— Diane Von Furstenberg" },
+                    { q: "You cannot pour from an empty cup. Take care of yourself first.", a: "— Unknown" },
+                    { q: "The quality of your life is the quality of your relationships.", a: "— Tony Robbins" },
+                    { q: "Don't lose yourself trying to hold on to someone who doesn't care about losing you.", a: "— Unknown" }
+                ],
+                breakup: [
+                    { q: "Sometimes good things fall apart so better things can fall together.", a: "— Marilyn Monroe" },
+                    { q: "The pain you feel today is the strength you will feel tomorrow.", a: "— Unknown" },
+                    { q: "You don't need someone to complete you. You only need someone to accept you completely.", a: "— Unknown" },
+                    { q: "Letting go doesn't mean giving up, but rather accepting that there are things that cannot be.", a: "— Unknown" }
+                ],
+                friendship: [
+                    { q: "True friendship is not about being inseparable — it's being separated and nothing changes.", a: "— Unknown" },
+                    { q: "The people who are meant to be in your life will always gravitate back to you.", a: "— Unknown" },
+                    { q: "You deserve people who are as loyal and as genuine as you are.", a: "— Unknown" }
+                ]
+            };
+            const qList = quotes[subtype] || quotes.general;
+            const advice = {
+                general: `<div style="font-size:12.5px;color:var(--ink2);line-height:1.75;margin-bottom:9px;">Happiness is not found in another person — it is built within you, and then <strong style="color:var(--ink)">shared</strong> with others. Relationships thrive when both people bring their own sense of wholeness.</div>`,
+                breakup: `<div style="font-size:12.5px;color:var(--ink2);line-height:1.75;margin-bottom:9px;">A breakup is painful — and it is also an invitation to rediscover who you are outside of that relationship. Your worth was never defined by someone else's choice.</div>`,
+                friendship: `<div style="font-size:12.5px;color:var(--ink2);line-height:1.75;margin-bottom:9px;">Friendships that drain you more than they fill you are worth examining honestly. Real friendship should feel safe, mutual, and growth-giving.</div>`
+            };
+            const steps = {
+                general: [
+                    ["💚", "Invest in your relationship with yourself first — your hobbies, your values, your peace."],
+                    ["🗣", "Communicate needs clearly and early — most relationship pain comes from unspoken expectations."],
+                    ["🛡", "Healthy boundaries are not walls — they are doors you choose to open selectively."],
+                    ["🌱", "Give yourself permission to outgrow relationships that no longer serve your wellbeing."]
+                ],
+                breakup: [
+                    ["💚", "Allow yourself to grieve — but set a daily limit: 30 min of feeling it, then redirect."],
+                    ["📵", "Create space: reduce contact for at least 2 weeks to let your nervous system reset."],
+                    ["🏃", "Redirect the emotional energy into something physical — exercise, creative work, nature."],
+                    ["🤝", "Lean on one or two trusted friends or family members — you don't have to process this alone."]
+                ],
+                friendship: [
+                    ["💚", "Identify whether this friendship drains or fills you — your gut usually knows."],
+                    ["🗣", "If it matters to you, have one honest, calm conversation about what's been hard."],
+                    ["🛡", "If boundaries are consistently crossed after being communicated, it may be time to create distance."],
+                    ["🌱", "Invest energy in friendships that are mutual — where care flows both ways."]
+                ]
+            };
+            const q = qList[Math.floor(Math.random() * qList.length)];
+            const sArr = steps[subtype] || steps.general;
+            const stepsHtml = sArr.map(([e, t]) => `<div class="cs"><div class="cn" style="background:var(--pu);color:#fff">${e}</div><span>${t}</span></div>`).join('');
+            return `<div class="cc cp"><div class="ccttl">💜 Relationship & Connection</div>
+<div style="background:rgba(168,120,232,.1);border-radius:9px;padding:9px 12px;margin-bottom:9px;">
+<div style="font-size:13px;font-style:italic;color:var(--ink);line-height:1.7;margin-bottom:4px;">"${q.q}"</div>
+<div style="font-size:11px;color:var(--pu);font-weight:600;">${q.a}</div>
+</div>
+${advice[subtype] || advice.general}
+${stepsHtml}</div>`;
+        }
+
+        /* ── RESOURCE LINKS ── */
+        function cardRes(type) {
+            const S = {
+                breathing: [
+                    { i: '🌐', n: 'Calm.com', d: 'Guided breathing & sleep', l: 'calm.com', u: 'https://www.calm.com' },
+                    { i: '🌐', n: 'Headspace', d: 'Breathing & mindfulness', l: 'headspace.com', u: 'https://www.headspace.com' },
+                    { i: '🎥', n: 'Box Breathing (Navy SEAL)', d: '4-min technique on YouTube', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=box+breathing+technique' },
+                    { i: '🎥', n: '4-7-8 Dr. Andrew Weil', d: 'Original guided practice', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=4-7-8+breathing+dr+weil' },
+                ],
+                meditation: [
+                    { i: '🌐', n: 'Insight Timer', d: 'Free — largest library', l: 'insighttimer.com', u: 'https://insighttimer.com' },
+                    { i: '🌐', n: 'Smiling Mind', d: 'Free mindfulness for all ages', l: 'smilingmind.com.au', u: 'https://www.smilingmind.com.au' },
+                    { i: '🎥', n: '10-min Body Scan', d: 'Guided relaxation for stress', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=10+minute+body+scan+meditation' },
+                    { i: '🎥', n: 'Sleep Meditation', d: 'For racing thoughts at bedtime', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=sleep+meditation+anxiety' },
+                ],
+                exercise: [
+                    { i: '🎥', n: 'Yoga for Stress (10 min)', d: 'No equipment, beginner friendly', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=yoga+for+stress+10+minutes+beginner' },
+                    { i: '🎥', n: 'Senior Chair Exercises', d: 'Gentle, seated, safe for all ages', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=senior+chair+exercises+gentle' },
+                    { i: '🌐', n: 'Nike Training Club', d: 'Free workouts every level', l: 'nike.com/ntc-app', u: 'https://www.nike.com/ntc-app' },
+                    { i: '🎥', n: 'Walking Meditation', d: 'Nature walk with narration', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=walking+meditation+nature' },
+                ],
+                senior: [
+                    { i: '🎥', n: 'Chair Yoga for Seniors', d: 'Gentle seated movements, 15 min', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=chair+yoga+for+seniors+gentle' },
+                    { i: '🎥', n: 'Breathing Exercises for Seniors', d: 'Deep breathing, slow pace', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=breathing+exercises+for+seniors' },
+                    { i: '🎥', n: 'Guided Meditation for Seniors', d: 'Calm voice, easy to follow', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=guided+meditation+for+seniors' },
+                    { i: '🌐', n: 'Healthline: Senior Wellness', d: 'Evidence-based senior health tips', l: 'healthline.com', u: 'https://www.healthline.com/health/senior-health' },
+                ],
+                motivation: [
+                    { i: '🎥', n: 'TED: Mental Health Talks', d: 'Real stories from real people', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=ted+talk+mental+health' },
+                    { i: '🎥', n: 'Morning Motivation', d: 'Start your day with purpose', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=morning+motivation+speech' },
+                    { i: '🌐', n: 'Happify', d: 'Science-based happiness tools', l: 'happify.com', u: 'https://www.happify.com' },
+                    { i: '🌐', n: 'Positive Psychology', d: 'Evidence-based wellbeing resources', l: 'positivepsychology.com', u: 'https://positivepsychology.com' },
+                ],
+                teen: [
+                    { i: '🌐', n: 'ReachOut.com', d: 'Teen mental health — easy language', l: 'au.reachout.com', u: 'https://au.reachout.com' },
+                    { i: '🌐', n: 'Teens Against Bullying', d: 'Resources for bullying situations', l: 'pacerteensagainstbullying.org', u: 'https://pacerteensagainstbullying.org' },
+                    { i: '🎥', n: 'Teen Anxiety Tips', d: 'What actually helps — from teens', l: 'Watch ↗', u: 'https://www.youtube.com/results?search_query=teen+anxiety+tips+school' },
+                    { i: '🌐', n: 'Crisis Text Line', d: 'Text HOME to 741741', l: 'crisistextline.org', u: 'https://www.crisistextline.org' },
+                ]
+            };
+            const rows = (S[type] || S.breathing).map(r => `<div class="rrow" onclick="openLink('${r.u}')"><div class="ri">${r.i}</div><div class="rbd"><div class="rbn">${r.n}</div><div class="rbd2">${r.d}</div></div><div class="rl">${r.l}</div></div>`).join('');
+            const T = { breathing: '🫁 Breathing Resources', meditation: '🧘 Meditation Resources', exercise: '🏃 Exercise Resources', senior: '🌅 Senior Wellness Resources', motivation: '🎯 Motivation Resources', teen: '💜 Teen Support Resources' };
+            return `<div class="cc cb"><div class="ccttl">${T[type]}</div>${rows}</div>`;
+        }
+
+        function cardBreath() {
+            return `<div class="cc ct"><div class="ccttl">🫁 4-7-8 Breathing — Try Right Now</div>
+<div class="cs"><div class="cn" style="background:var(--tl);color:#071810">1</div><span>Sit comfortably, close your eyes</span></div>
+<div class="cs"><div class="cn" style="background:var(--tl);color:#071810">2</div><span>Inhale through your nose — <strong style="color:var(--tl)">4 seconds</strong></span></div>
+<div class="cs"><div class="cn" style="background:var(--tl);color:#071810">3</div><span>Hold your breath — <strong style="color:var(--tl)">7 seconds</strong></span></div>
+<div class="cs"><div class="cn" style="background:var(--tl);color:#071810">4</div><span>Exhale slowly — <strong style="color:var(--tl)">8 seconds</strong></span></div>
+<div class="cs"><div class="cn" style="background:var(--tl);color:#071810">5</div><span>Repeat <strong style="color:var(--tl)">4 times</strong></span></div></div>`;
+        }
+
+        function cardJournal() {
+            return `<div class="cc ca"><div class="ccttl">📓 10-Minute Journaling</div>
+<div class="cs"><div class="cn" style="background:var(--am);color:#071810">1</div><span>Open any notes app or grab paper</span></div>
+<div class="cs"><div class="cn" style="background:var(--am);color:#071810">2</div><span>Write everything you feel — no editing, no grammar</span></div>
+<div class="cs"><div class="cn" style="background:var(--am);color:#071810">3</div><span>Set a 10-minute timer and keep writing</span></div>
+<div class="cs"><div class="cn" style="background:var(--am);color:#071810">4</div><span>Don't read it back — just let it out</span></div></div>`;
+        }
+
+        function cardCounsel() {
+            return `<div class="cc ca"><div class="ccttl">🤝 Professional Support</div>
+<div class="rr2"><span>🇸🇬</span><span><strong>Singapore SOS</strong></span><span class="rn">1800-221-4444</span></div>
+<div class="rr2"><span>🇮🇩</span><span><strong>Into The Light</strong></span><span class="rn">119 ext 8</span></div>
+<div class="rr2"><span>🇮🇩</span><span><strong>Yayasan Pulih</strong></span><span class="rn">(021) 788-42580</span></div>
+<div class="rr2"><span>🇲🇾</span><span><strong>Befrienders MY</strong></span><span class="rn">03-7627-2929</span></div></div>`;
+        }
+
+        function cardCrisis() {
+            return `<div class="cc cr2"><div class="ccttl">📞 Crisis Lines — Free · 24h · Confidential</div>
+<div class="hl"><span>🇸🇬</span><span class="hn">Singapore SOS</span><span class="hnum">1800-221-4444</span></div>
+<div class="hl"><span>🇸🇬</span><span class="hn">IMH Emergency</span><span class="hnum">6389-2222</span></div>
+<div class="hl"><span>🇮🇩</span><span class="hn">Indonesia (free, 24h)</span><span class="hnum">119 ext 8</span></div>
+<div class="hl"><span>🇮🇩</span><span class="hn">Yayasan Pulih</span><span class="hnum">(021) 788-42580</span></div>
+<div class="hl"><span>🇲🇾</span><span class="hn">Befrienders MY</span><span class="hnum">03-7627-2929</span></div>
+<div style="margin-top:7px;font-size:11px;color:var(--ink2);">No name required. Trained listeners. 24 hours.</div></div>`;
+        }
+
+        function cardTeen(sub) {
+            const C = {
+                bullying: [["💜", "You are not the problem. Bullying reflects the bully's insecurity — not your worth."], ["📢", "Tell a trusted adult: teacher, school counsellor, or parent. You don't have to manage this alone."], ["📸", "Document it — screenshot online bullying, write down dates and what happened."], ["🚪", "Create distance from the bully's space — online and offline where possible."]],
+                socialmedia: [["📵", "Social media shows highlights — not reality. Most accounts are carefully staged performances."], ["⏸", "Try a 3-day partial digital detox. Notice how your mood changes."], ["🔇", "Mute or unfollow accounts that consistently make you feel bad about yourself."], ["🌱", "Replace one hour of scrolling with one real-world activity daily."]],
+                relationship: [["💚", "Breakups and friendship issues are real pain — it's okay to grieve them properly."], ["⏱", "Give yourself 30 minutes a day to feel it — then consciously redirect your energy."], ["🤝", "Reach out to one trusted friend or family member, even just to be nearby."], ["🎯", "Redirect emotional energy into something creative, physical, or meaningful."]]
+            };
+            const T = { bullying: '💜 Dealing with Bullying', socialmedia: '💜 Social Media & Mental Health', relationship: '💜 Teen Relationship Pain' };
+            const arr = C[sub] || C.bullying;
+            return `<div class="cc cp"><div class="ccttl">${T[sub] || T.bullying}</div>${arr.map(([e, t]) => `<div class="cs"><div class="cn" style="background:var(--pu);color:#fff">${e}</div><span>${t}</span></div>`).join('')}</div>`;
+        }
+
+        function cardSpiritual(name) {
+            const nm = name ? `, ${name}` : '';
+            return `<div class="cc cg"><div class="ccttl">✨ Finding Inner Peace</div>
+<div style="background:rgba(255,200,50,.08);border-radius:9px;padding:9px 12px;margin-bottom:9px;font-size:13px;font-style:italic;color:var(--ink);line-height:1.7;">"Be still and know. The answers you seek are often found in the quiet spaces between your thoughts."</div>
+<div class="cs"><div class="cn" style="background:var(--go);color:#071810">🙏</div><span><strong>Take a quiet moment</strong> — sit still, breathe slowly, and allow yourself to be honest about what you feel.</span></div>
+<div class="cs"><div class="cn" style="background:var(--go);color:#071810">📖</div><span><strong>Return to your faith</strong> — if you have one. Read, pray, or simply sit in that space of connection.</span></div>
+<div class="cs"><div class="cn" style="background:var(--go);color:#071810">🌱</div><span><strong>Purpose unfolds slowly${nm}.</strong> Many meaningful lives passed through seasons of feeling exactly like this.</span></div>
+<div class="cs"><div class="cn" style="background:var(--go);color:#071810">🫂</div><span><strong>Consider talking to a spiritual leader</strong> — pastor, imam, priest — alongside professional support.</span></div></div>`;
+        }
+
+        function cardActivities() {
+            const items = ['🚶 Walk outside 20 min', '🏃 Go for a run', '🧘 10-min yoga video', '🎵 Play music you love', '🎨 Draw or paint freely', '📚 Read something unrelated', '🍳 Cook something new', '📞 Call a friend', '🌿 Sit quietly in nature', '🎯 Set one small goal today'];
+            return `<div class="cc ct"><div class="ccttl">⚡ Activities to Try Right Now</div>
+<div class="act-chips">${items.slice(0, 6).map(a => `<span class="ac">${a}</span>`).join('')}</div>
+<div style="margin-top:7px;font-size:11px;color:var(--ink2);">Even 10 minutes of movement measurably reduces cortisol and lifts mood.</div></div>`;
+        }
+
+        function cardDoctor(reason, urg) {
+            const t = urg === 'now' ? '🚨 See a Doctor Now' : '🏥 See a Doctor This Week';
+            return `<div class="cc cb"><div class="ccttl">${t}</div>
+<div style="font-size:12.5px;color:var(--ink2);line-height:1.75;margin-bottom:8px;">${reason}</div>
+<div class="cs"><div class="cn" style="background:var(--bl);color:#071810">1</div><span>Tell the doctor how long you have felt this way</span></div>
+<div class="cs"><div class="cn" style="background:var(--bl);color:#071810">2</div><span>Describe your physical symptoms (sleep, appetite, energy, pain)</span></div>
+<div class="cs"><div class="cn" style="background:var(--bl);color:#071810">3</div><span>Mention which areas of life have been affected</span></div>
+<div class="cs"><div class="cn" style="background:var(--bl);color:#071810">4</div><span>Ask for a referral to a counsellor or mental health specialist if needed</span></div></div>`;
+        }
+
+        /* ── ANALYSIS ── */
+        function analyse(txt) {
+            const t = txt.toLowerCase();
+            for (const w of KW.crisis) if (t.includes(w)) return { lv: 'crisis', cats: [] };
+            const found = [];
+            for (const [cat, words] of Object.entries(KW)) {
+                if (cat === 'crisis') continue;
+                if (words.some(w => t.includes(w))) found.push(cat);
+            }
+            if (!found.length) return { lv: 'check', cats: [] };
+            if (found.length === 1) return { lv: 'mild', cats: found };
+            if (found.length === 2) return { lv: 'mod', cats: found };
+            return { lv: 'high', cats: found };
+        }
+
+        function fresh(key, arr) {
+            if (arr.length === 1) return arr[0];
+            const last = _li[key] ?? -1;
+            let idx; do { idx = Math.floor(Math.random() * arr.length); } while (idx === last && arr.length > 1);
+            _li[key] = idx; return arr[idx];
+        }
+
+        /* ── ESCALATION ── */
+        function checkDoc(res) {
+            if (docGiven) return null;
+            const dur = U.dur, chronic = ['weeks', 'months', 'longer'].includes(dur), long = ['months', 'longer'].includes(dur);
+            if (res.lv === 'high' || highT >= 2) {
+                docGiven = true;
+                return cardDoctor(long ? `You have been experiencing high stress for an extended period. Self-care alone is not sufficient.` : `Your stress is affecting multiple areas of life at once. Professional assessment is needed.`, long ? 'now' : 'soon');
+            }
+            if ((res.lv === 'mod' || modT >= 3) && chronic) {
+                docGiven = true;
+                return cardDoctor(`You have been feeling this way for ${dur === 'weeks' ? '2–4 weeks' : 'an extended period'}. A doctor visit is strongly recommended.`, 'soon');
+            }
+            return null;
+        }
+
+        /* ── CHECKPOINT MESSAGE ── */
+        function showCheckpoint() {
+            checkpointShown = true;
+            const msgs = document.getElementById('msgs');
+            const w = document.createElement('div'); w.className = 'msg b chk';
+            const av = document.createElement('div'); av.className = 'av'; av.textContent = '🧠';
+            const b = document.createElement('div'); b.className = 'bub';
+            b.innerHTML = `<strong style="color:var(--am)">⏸ Quick check-in</strong><br><br>We have covered quite a bit together. Has this been helpful so far?`;
+            w.appendChild(av); w.appendChild(b); msgs.appendChild(w); scrollD();
+            // Show special checkpoint chips
+            const c = document.getElementById('chips'); c.innerHTML = '';
+            ['✅ Yes, this has helped me', '🔍 I want to explore one more thing', '📋 Take me to my summary'].forEach(label => {
+                const s = document.createElement('span'); s.className = 'chip ckp'; s.textContent = label;
+                s.onclick = () => handleCheckpoint(label);
+                c.appendChild(s);
+            });
+        }
+
+        function handleCheckpoint(label) {
+            document.getElementById('chips').innerHTML = '';
+            addUser(label);
+            if (label.includes('Yes') || label.includes('summary')) {
+                showTyping(); setTimeout(() => { const ti = document.getElementById('ti'); if (ti) ti.remove(); showSummary(); }, 900);
+            } else {
+                checkpointShown = false; // allow one more round
+                setTimeout(() => {
+                    addBot("Of course — please go ahead and share what else is on your mind. I'm still here. 🌿", 'safe', '');
+                    setChips(['Tell me more about my situation', 'Show me relaxation resources', 'Show me exercise guides', 'There is more to share']);
+                }, 400);
+            }
+        }
+
+        /* ── CONTEXT-AWARE CHIPS ── */
+        function chipsFor(txt, lv) {
+            const t = (txt || '').toLowerCase();
+            if (lv === 'crisis') return ['I need more help', 'I am safe right now', 'I want to keep talking'];
+            if (t.match(/bully|bullied/)) return ['What should I do next?', 'Teen support resources', 'Show me motivation videos', 'There is more to share'];
+            if (t.match(/social media|instagram|tiktok|hate comment/)) return ['Advice on digital detox', 'Resources for online issues', 'There is more to share'];
+            if (t.match(/break.?up|dumped|ghost|heartbreak|partner|relationship/)) return ['Relationship advice & quotes', 'Tell me more about what happened', 'Show me motivation videos', 'There is more to share'];
+            if (t.match(/friend|friendship|best friend|betrayal|trust/)) return ['Friendship advice & quotes', 'Tell me more about what happened', 'Show me motivation videos', 'There is more to share'];
+            if (t.match(/god|pray|faith|church|mosque|lost|empty|purpose|meaningless/)) return ['Spiritual guidance', 'Show me meditation resources', 'Other activities to help', 'There is more to share'];
+            if (t.match(/breath|meditat|relax|calm/)) return ['Show me breathing resources', 'Show me meditation resources', 'Show me exercise visuals', 'There is more to share'];
+            if (t.match(/exercise|yoga|walk|sport|workout/)) return ['Show me exercise visuals', 'Show me breathing resources', 'Tell me more about my feelings', 'There is more to share'];
+            if (t.match(/senior|elder|retired|older adult|parent.*stress|grandp/) || U.occ === 'retired') return ['Senior wellness guide', 'Show me gentle exercises', 'Show me meditation resources', 'There is more to share'];
+            if (lv === 'mild') return ['I tried the breathing', 'Show me relaxation resources', 'Show me exercise visuals', 'There is more to share'];
+            if (lv === 'mod') return ['Show me meditation resources', 'Show me helpful websites', 'I need stronger support', 'There is more to share'];
+            if (lv === 'high') return ['How do I find help', 'Show me support resources', 'There is more to share'];
+            return ['I feel really tired', 'Family pressure', 'Work stress', 'School problems', 'I feel alone', 'There is more to share'];
+        }
+
+        /* ── AI SYSTEM PROMPT BUILDER ── */
+        function detectLang(txt) {
+            // Simple heuristic: count Indonesian indicator words
+            const idWords = /\b(aku|kamu|saya|gue|lo|nggak|tidak|banget|dong|sih|ya|iya|dan|atau|dengan|untuk|dari|ke|di|ini|itu|ada|bisa|mau|udah|sudah|lagi|juga|tapi|kalau|kalau|gimana|kenapa|apa|siapa|kapan|mana|yang|buat|bikin|kayak|kayaknya|soal|makanya|emang|pasti|aja|juga|terus|sesudah|setelah|sebelum|lebih|paling|sangat|semoga|tolong|mohon|terima|kasih|makasih|selamat|halo|hai|oke|baik|bagus|senang|sedih|marah|takut|khawatir|stress|kerja|sekolah|keluarga|teman|sahabat|pacar|cinta|putus|galau)\b/i;
+            const idScore = (txt.match(idWords) || []).length;
+            return idScore >= 2 ? 'id' : 'en';
+        }
+
+        function buildSystemPrompt(user, lastUserMsg) {
+            const langParam = new URLSearchParams(window.location.search).get('lang');
+
+            let langRule;
+            if (langParam === 'id') {
+                langRule = 'LANGUAGE RULE: Always respond in Bahasa Indonesia.';
+            } else if (langParam === 'en') {
+                langRule = 'LANGUAGE RULE: Always respond in English.';
+            } else {
+                // Auto-detect from the latest user message
+                const detectedLang = lastUserMsg ? detectLang(lastUserMsg) : 'id';
+                if (detectedLang === 'en') {
+                    langRule = `CRITICAL LANGUAGE RULE: The user is writing in ENGLISH. You MUST reply in ENGLISH only. Do NOT use Bahasa Indonesia. Mirror their language exactly — if they use casual English, reply casually in English.`;
+                } else {
+                    langRule = `CRITICAL LANGUAGE RULE: The user is writing in Bahasa Indonesia. You MUST reply in Bahasa Indonesia. Ikuti gaya bahasa mereka — kalau pakai bahasa gaul/informal (gue, lo, nggak, dll), ikuti gaya itu.`;
+                }
+            }
+
+            const nm = user.name || 'teman';
+            const ageStr = user.age ? `${user.age} tahun` : 'tidak disebutkan';
+            const ageNote = user.age <= 19 && user.age > 0 ? ' (teen/remaja)' : user.age >= 60 ? ' (senior)' : '';
+            const gMap = { female: 'female/perempuan', male: 'male/laki-laki', other: 'other/lainnya' };
+            const oMap = { student: 'student/pelajar', worker: 'worker/karyawan', retired: 'retired/pensiunan', other: 'other/lainnya' };
+            const dMap = { today: 'just today', days: 'a few days', week: 'about a week', weeks: '2–4 weeks', months: 'over a month', longer: 'several months or longer' };
+
+            return `${langRule}
+
+You are Mind-Guard, a warm, empathetic companion — not a chatbot. You are the user's most trusted friend who listens without judgment.
+
+USER PROFILE:
+- Name: ${nm}
+- Age: ${ageStr}${ageNote}
+- Gender: ${gMap[user.gender] || 'not specified'}
+- Status: ${oMap[user.occ] || 'not specified'}
+- Duration feeling this way: ${dMap[user.dur] || 'not specified'}
+
+HOW TO SPEAK:
+- ${langRule}
+- Talk like a true friend — warm, natural, honest, never stiff
+- Do NOT jump straight to solutions — first validate their feelings, make them feel heard
+- Always end with ONE personal, sincere follow-up question
+- Use their name occasionally if provided
+- Keep responses to 2–4 sentences only — this is not a lecture
+- If teen (≤19): casual language, relatable to school/peer life
+- If senior (≥60 or retired): patient, calm, respectful
+- Never say "I am an AI" or "I cannot feel" — be a friend
+- Use warm emoji sparingly (🌿 💚 🫂)
+- If crisis signals detected: stay calm, show deep care, suggest hotline
+
+YOUR MISSION: Make the user feel heard, understood, and not alone. You are their safe space.`;
+        }
+
+        /* ── SMART CARD INJECTOR (local rule-based, runs AFTER AI response) ── */
+        function getCards(res, txt) {
+            const t = (txt || '').toLowerCase();
+            const isTeen = U.age > 0 && U.age <= 19;
+            const isSenior = U.age >= 60 || U.occ === 'retired';
+            const dc = checkDoc(res);
+
+            if (t.match(/bully|bullied|bullying|cyberbullying/))
+                return cardTeen('bullying') + cardRes('teen') + (dc || '');
+            if (t.match(/social media|instagram|tiktok|hate comment|body shaming/))
+                return cardTeen('socialmedia') + cardActivities() + (dc || '');
+            if (t.match(/break.?up|dumped|ghost|heartbreak|ex-|relationship.*pain|love.*hurt/))
+                return cardRelationship('breakup') + cardActivities() + (dc || '');
+            if (t.match(/friend.*problem|friend.*fight|friendship.*hard|best friend.*hurt|friendship.*broken|trust.*friend|betrayal|falling out/))
+                return cardRelationship('friendship') + cardActivities() + (dc || '');
+            if (t.match(/relationship|partner|romantic|dating|love/) || (res.cats && res.cats.includes('relationship')))
+                return cardRelationship('general') + cardActivities() + (dc || '');
+            if (t.match(/god|pray|faith|church|mosque|temple|lost|empty|meaningless|no purpose|why am i here|inner peace|nothing matters/))
+                return cardSpiritual(U.name) + cardRes('meditation') + (dc || '');
+            if (t.match(/senior wellness|gentle exercise/) || (isSenior && t.match(/exercise|move|active|walk|yoga|stretch/)))
+                return cardVisual(true) + cardRes('senior');
+            if (t.match(/breath|breathing technique|meditat|relax technique|how to calm|calm down/))
+                return cardVisual(isSenior) + cardRes(isSenior ? 'senior' : 'breathing') + cardRes('meditation');
+            if (t.match(/exercise|workout|yoga|sport|run|walk.*stress|movement|physical activity/))
+                return cardVisual(isSenior) + cardRes(isSenior ? 'senior' : 'exercise');
+            if (t.match(/motivation|motivat|inspiring/))
+                return cardRes('motivation');
+
+            // Level-based cards
+            if (res.lv === 'mild') return cardBreath() + (isTeen ? cardRes('teen') : '') + (dc || '');
+            if (res.lv === 'mod')  return cardJournal() + cardRes('meditation') + (dc || '');
+            if (res.lv === 'high') return cardCounsel() + cardRes('motivation') + (dc || '');
+
+            return dc || '';
+        }
+
+        /* ── DEPRECATED (kept as stub reference, body removed) ── */
+        function buildResp(res, txt) { return { text: '', extra: '', chips: [], lv: res.lv }; }
+
+        /* ── UI ── */
+        function addBot(txt, lv, extra, isCk) {
+            const ti = document.getElementById('ti'); if (ti) ti.remove();
+            const msgs = document.getElementById('msgs');
+            const w = document.createElement('div'); w.className = 'msg b' + (lv === 'crisis' ? ' cry' : '') + (isCk ? ' chk' : '');
+            const av = document.createElement('div'); av.className = 'av'; av.textContent = '🧠';
+            const b = document.createElement('div'); b.className = 'bub';
+            b.innerHTML = fmt(txt) + (extra || '');
+            w.appendChild(av); w.appendChild(b); msgs.appendChild(w); scrollD();
+        }
+        function addUser(txt) {
+            const msgs = document.getElementById('msgs');
+            const w = document.createElement('div'); w.className = 'msg u';
+            const av = document.createElement('div'); av.className = 'av'; av.textContent = '👤';
+            const b = document.createElement('div'); b.className = 'bub'; b.textContent = txt;
+            w.appendChild(av); w.appendChild(b); msgs.appendChild(w); scrollD();
+        }
+        function showTyping() {
+            if (document.getElementById('ti')) return;
+            const msgs = document.getElementById('msgs');
+            const w = document.createElement('div'); w.className = 'msg b'; w.id = 'ti';
+            const av = document.createElement('div'); av.className = 'av'; av.textContent = '🧠';
+            const b = document.createElement('div'); b.className = 'tb2';
+            [0, 1, 2].forEach(() => { const d = document.createElement('div'); d.className = 'dot'; b.appendChild(d); });
+            w.appendChild(av); w.appendChild(b); msgs.appendChild(w); scrollD();
+        }
+        function fmt(t) { return t.replace(/\n\n/g, '</p><p style="margin-top:7px">').replace(/\n/g, '<br>'); }
+        function scrollD() { const m = document.getElementById('msgs'); setTimeout(() => m.scrollTop = m.scrollHeight, 40); }
+        function setChips(list) {
+            const c = document.getElementById('chips'); c.innerHTML = '';
+            list.forEach(label => {
+                const s = document.createElement('span'); s.className = 'chip'; s.textContent = label;
+                s.onclick = () => handleChip(label); c.appendChild(s);
+            });
+        }
+        function clearChips() { document.getElementById('chips').innerHTML = ''; }
+
+        function handleChip(label) {
+            const L = label.toLowerCase();
+            if (L.includes('tell me more') || L.includes('more to share')) { openTMC(); return; }
+            if (L.includes('breathing resource')) { addUser(label); setTimeout(() => addBot('Here are the best breathing resources:', 'safe', cardRes('breathing')), 400); setChips(['Show me meditation resources', 'Show me exercise visuals', 'Tell me more']); return; }
+            if (L.includes('meditation resource')) { addUser(label); setTimeout(() => addBot('Here are excellent meditation resources:', 'safe', cardRes('meditation')), 400); setChips(['Show me breathing resources', 'Show me exercise visuals', 'Tell me more']); return; }
+            if (L.includes('exercise visual') || L.includes('exercise guide')) { addUser(label); setTimeout(() => addBot('Here is your visual exercise guide:', 'safe', cardVisual(U.occ === 'retired' || U.age >= 60)), 400); setChips(['Show me breathing resources', 'Show me motivation resources', 'Tell me more']); return; }
+            if (L.includes('senior wellness') || L.includes('gentle exercise')) { addUser(label); setTimeout(() => addBot('Here is the senior wellness guide:', 'safe', cardVisual(true) + cardRes('senior')), 400); setChips(['Show me breathing resources', 'Show me meditation resources', 'Tell me more']); return; }
+            if (L.includes('motivation resource')) { addUser(label); setTimeout(() => addBot('Here are motivational resources:', 'safe', cardRes('motivation')), 400); setChips(['Show me breathing resources', 'Tell me more']); return; }
+            if (L.includes('teen support resource')) { addUser(label); setTimeout(() => addBot('Resources for young people:', 'safe', cardRes('teen')), 400); setChips(['Bullying help', 'Social media stress', 'Tell me more']); return; }
+            if (L.includes('relationship advice') || L.includes('friendship advice')) { addUser(label); setTimeout(() => addBot('Here is guidance and wisdom for relationships:', 'safe', cardRelationship(L.includes('friend') ? 'friendship' : 'general')), 400); setChips(['Show me motivation resources', 'Tell me more about my situation']); return; }
+            if (L.includes('spiritual guidance')) { addUser(label); setTimeout(() => addBot('Here is a moment of spiritual reflection:', 'safe', cardSpiritual(U.name)), 400); setChips(['Show me meditation resources', 'Tell me more']); return; }
+            if (L.includes('activities')) { addUser(label); setTimeout(() => addBot('Here are some activities that can genuinely shift your mood:', 'safe', cardActivities()), 400); setChips(['Show me exercise visuals', 'Show me breathing resources', 'Tell me more']); return; }
+            if (L.includes('yes, this has helped') || L.includes('take me to my summary')) { addUser(label); showTyping(); setTimeout(() => { const ti = document.getElementById('ti'); if (ti) ti.remove(); showSummary(); }, 900); return; }
+            if (L.includes('explore one more')) { handleCheckpoint(label); return; }
+            document.getElementById('inp').value = label; send();
+        }
+
+        function updateUI(lv, cats) {
+            const m = { safe: { p: 5, c: '#30BE84', ph: 'Safe', bl: 'Safe', bc: 'bok' }, check: { p: 10, c: '#30BE84', ph: 'Listening', bl: 'Safe', bc: 'bok' }, mild: { p: 30, c: '#30BE84', ph: 'Mild', bl: 'Mild', bc: 'bok' }, mod: { p: 62, c: '#E8A840', ph: 'Moderate', bl: 'Moderate', bc: 'bam' }, high: { p: 84, c: '#E04848', ph: 'High', bl: 'High', bc: 'brd' }, crisis: { p: 100, c: '#FF5050', ph: '⚠ Crisis', bl: '⚠ Crisis', bc: 'bcr' } };
+            const cfg = m[lv] || m.check;
+            document.getElementById('meter').style.display = 'block';
+            document.getElementById('mf').style.width = cfg.p + '%'; document.getElementById('mf').style.background = cfg.c;
+            document.getElementById('mp').textContent = cfg.ph; document.getElementById('mp').style.color = cfg.c;
+            document.getElementById('mc').textContent = cats && cats.length ? 'Detected: ' + cats.join(' · ') : 'Listening…';
+            document.getElementById('tbg').className = 'tbg ' + cfg.bc; document.getElementById('tbg').textContent = cfg.bl;
+            const stMap = { safe: 'Online · Safe space', check: 'Listening…', mild: 'Mild stress detected', mod: 'Moderate stress detected', high: 'High stress detected', crisis: 'Crisis — call hotline' };
+            document.getElementById('tstat').textContent = stMap[lv] || 'Listening…';
+            if (lv !== 'check' && lv !== lastLv) showToast(cfg.ph + ' stress detected');
+            lastLv = lv;
+        }
+        function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 2600); }
+        function openLink(url) { try { window.open(url, '_blank'); } catch (e) { showToast('Link: ' + url); } }
+
+        /* ── TMC ── */
+        function openTMC(p) {
+            document.getElementById('tmc-p').textContent = p || 'Write freely — as much or as little as you want. No one else sees this.';
+            document.getElementById('tmc-a').value = '';
+            document.getElementById('tmc').classList.add('open');
+            setTimeout(() => document.getElementById('tmc-a').focus(), 300);
+        }
+        function closeTMC() { document.getElementById('tmc').classList.remove('open'); }
+        function submitTMC() {
+            const v = document.getElementById('tmc-a').value.trim();
+            if (!v) { showToast('Please write something first.'); return; }
+            closeTMC(); document.getElementById('inp').value = v; send();
+        }
+
+        /* ── SEND (OpenAI streaming via /api/chat) ── */
+        async function send() {
+            const inp = document.getElementById('inp');
+            const txt = inp.value.trim();
+            if (!txt || busy || sessionDone) return;
+
+            clearChips();
+            addUser(txt);
+            inp.value = '';
+            inp.style.height = 'auto';
+            busy = true;
+            document.getElementById('sbtn').disabled = true;
+            turn++;
+
+            // ── End triggers ──
+            const bye = ['thanks', 'thank you', 'bye', 'goodbye', 'done', 'finish',
+                         'end session', 'im done', "i'm done", "that's all",
+                         "i feel better", "i'm okay now", 'im okay now', 'no more',
+                         'makasih', 'terima kasih', 'udahan', 'selesai', 'sudah cukup'];
+            if (bye.some(w => txt.toLowerCase().includes(w))) {
+                showTyping();
+                setTimeout(() => {
+                    const ti = document.getElementById('ti'); if (ti) ti.remove();
+                    showSummary();
+                    busy = false;
+                    document.getElementById('sbtn').disabled = false;
+                }, 900);
+                return;
+            }
+
+            // ── Force end at turn 8 ──
+            if (turn >= 8 && !sessionDone) {
+                showTyping();
+                setTimeout(() => {
+                    const ti = document.getElementById('ti'); if (ti) ti.remove();
+                    addBot('Kita udah ngobrol banyak hari ini. Biar aku rangkum semuanya buat kamu. 🌿', 'safe', '');
+                    setTimeout(() => showSummary(), 1200);
+                    busy = false;
+                    document.getElementById('sbtn').disabled = false;
+                }, 700);
+                return;
+            }
+
+            // ── Local crisis detection — no API call needed ──
+            const res = analyse(txt);
+            res.cats.forEach(c => allCats.add(c));
+            if (res.lv === 'mod') modT++;
+            if (res.lv === 'high') highT++;
+
+            if (res.lv === 'crisis') {
+                showTyping();
+                setTimeout(() => {
+                    const ti = document.getElementById('ti'); if (ti) ti.remove();
+                    addBot('Aku sangat senang kamu mau cerita ini ke aku. Kamu nggak sendirian. 💚\n\nSilakan hubungi salah satu hotline ini sekarang — gratis, 24 jam, rahasia:', 'crisis', cardCrisis());
+                    updateUI('crisis', []);
+                    setChips(['I need more help', 'I am safe right now', 'I want to keep talking']);
+                    busy = false;
+                    document.getElementById('sbtn').disabled = false;
+                }, 600);
+                return;
+            }
+
+            // ── Add user message to history ──
+            apiMessages.push({ role: 'user', content: txt });
+            showTyping();
+
+            // ── Call /api/chat with streaming ──
+            try {
+                const payload = {
+                    messages: [
+                        { role: 'system', content: buildSystemPrompt(U, txt) },
+                        ...apiMessages
+                    ]
+                };
+
+                const response = await fetch('/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error(`Server error ${response.status}`);
+
+                // Remove typing indicator
+                const ti = document.getElementById('ti'); if (ti) ti.remove();
+
+                // Create streaming message bubble
+                const msgs = document.getElementById('msgs');
+                const w   = document.createElement('div');
+                w.className = 'msg b';
+                const av  = document.createElement('div');
+                av.className = 'av'; av.textContent = '🧠';
+                const b   = document.createElement('div');
+                b.className = 'bub';
+                w.appendChild(av); w.appendChild(b);
+                msgs.appendChild(w);
+                scrollD();
+
+                // Read SSE stream chunk by chunk
+                const reader  = response.body.getReader();
+                const decoder = new TextDecoder();
+                let aiText = '';
+                let buffer = '';
+
+                outer: while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    buffer += decoder.decode(value, { stream: true });
+                    const lines = buffer.split('\n');
+                    buffer = lines.pop(); // keep partial last line
+
+                    for (const line of lines) {
+                        if (!line.startsWith('data: ')) continue;
+                        const data = line.slice(6).trim();
+                        if (data === '[DONE]') break outer;
+                        try {
+                            const parsed = JSON.parse(data);
+                            if (parsed.error) throw new Error(parsed.error);
+                            if (parsed.content) {
+                                aiText += parsed.content;
+                                b.textContent = aiText; // plain text while streaming
+                                scrollD();
+                            }
+                        } catch (e) { /* ignore individual chunk parse errors */ }
+                    }
+                }
+
+                // Finalize: apply formatting + inject smart cards
+                const cards = getCards(res, txt);
+                b.innerHTML = fmt(aiText) + (cards || '');
+                scrollD();
+
+                // Save AI response to history
+                apiMessages.push({ role: 'assistant', content: aiText });
+
+                // Update stress UI
+                updateUI(res.lv || 'check', res.cats);
+                lastInp = txt;
+                lastLv  = res.lv || 'check';
+
+                // Checkpoint check or chips
+                if (shouldCheckpoint()) {
+                    setTimeout(() => showCheckpoint(), 800);
+                } else {
+                    setChips(chipsFor(txt, res.lv));
+                }
+
+            } catch (err) {
+                const ti = document.getElementById('ti'); if (ti) ti.remove();
+                console.error('[Mind-Guard] API error:', err);
+                addBot('Maaf, koneksi ke server terputus. Pastikan app.py sudah berjalan, lalu coba lagi. 🌿', 'safe', '');
+                apiMessages.pop(); // roll back failed user message
+            }
+
+            busy = false;
+            document.getElementById('sbtn').disabled = false;
+        }
+        function onKey(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } }
+        function rsz(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 100) + 'px'; }
+
+        /* ── SUMMARY ── */
+        function showSummary() {
+            sessionDone = true;
+            const name = U.name || 'You';
+            const durMap = { today: 'today', days: 'a few days', week: 'about a week', weeks: '2–4 weeks', months: 'over a month', longer: 'several months or longer' };
+            const dur = durMap[U.dur] || 'an unspecified period';
+            const cats = [...allCats];
+            const lvLabel = { safe: 'No stress detected', check: 'Mild signals', mild: 'Phase 1–2 · Mild Stress', mod: 'Phase 3 · Moderate Stress', high: 'Phase 4 · High Stress', crisis: 'Phase 5 · Crisis' };
+            document.getElementById('et2').textContent = `Session complete${U.name ? ', ' + U.name : ''}`;
+            document.getElementById('ep').textContent = 'Your personalised summary, findings, and action plan.';
+            document.getElementById('s-prof').innerHTML = `
+<div class="srow"><span class="sk">Name</span><span class="sv">${U.name || 'Anonymous'}</span></div>
+<div class="srow"><span class="sk">Age</span><span class="sv">${U.age || '—'}${U.age && U.age <= 19 ? ' (Teen)' : U.age >= 60 ? ' (Senior)' : ''}</span></div>
+<div class="srow"><span class="sk">Gender</span><span class="sv">${U.gender || '—'}</span></div>
+<div class="srow"><span class="sk">Occupation</span><span class="sv">${({ student: '🎓 Student', worker: '💼 Worker', retired: '🌅 Retired', other: '🌐 Other' })[U.occ] || '—'}</span></div>
+<div class="srow"><span class="sk">Duration</span><span class="sv">Feeling this way for ${dur}</span></div>
+<div class="srow"><span class="sk">Session turns</span><span class="sv">${turn} exchanges</span></div>`;
+            document.getElementById('s-det').innerHTML = `
+<div class="srow"><span class="sk">Stress level</span><span class="sv">${lvLabel[lastLv] || lastLv}</span></div>
+<div class="srow"><span class="sk">Areas detected</span><span class="sv">${cats.length ? cats.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ') : 'Not clearly detected'}</span></div>
+<div class="srow"><span class="sk">Teen concerns</span><span class="sv">${cats.includes('teen') ? 'Yes — school / social / relationship' : '-'}</span></div>
+<div class="srow"><span class="sk">Relationship</span><span class="sv">${cats.includes('relationship') ? 'Yes — relationship pain detected' : '-'}</span></div>
+<div class="srow"><span class="sk">Spiritual signals</span><span class="sv">${cats.includes('spiritual') ? 'Yes — feelings of emptiness / purpose' : '-'}</span></div>
+<div class="srow"><span class="sk">Duration concern</span><span class="sv">${['weeks', 'months', 'longer'].includes(U.dur) ? '⚠ Ongoing — needs attention' : 'Within manageable range'}</span></div>`;
+            const recs = [];
+            if (lastLv === 'crisis') recs.push({ i: '🆘', h: 'Call a crisis line immediately', p: '119 ext 8 (Indonesia) · 1800-221-4444 (Singapore) · 03-7627-2929 (Malaysia). Free, 24h, no name required.' });
+            else if (lastLv === 'high' || docGiven) { recs.push({ i: '🏥', h: 'See a doctor or psychologist this week', p: 'Your stress level and duration suggest professional support is needed. Ask your GP for a referral to a mental health specialist.' }); recs.push({ i: '📞', h: 'Keep crisis numbers accessible', p: 'Into The Light 119 ext 8 · SOS Singapore 1800-221-4444 · Befrienders MY 03-7627-2929' }); }
+            else if (lastLv === 'mod') { recs.push({ i: '📓', h: 'Journal for 10 minutes every evening', p: 'No editing. Just write. Consistently for one week — notice the shift.' }); if (['weeks', 'months', 'longer'].includes(U.dur)) recs.push({ i: '🏥', h: 'Consider a GP check-in', p: `You have been feeling this way for ${dur}. Mentioning it to a doctor is a wise precaution.` }); recs.push({ i: '🧘', h: 'Try Insight Timer or Headspace', p: 'Free meditation content for stress and sleep. Start with 10 minutes tonight.' }); }
+            else {
+                recs.push({ i: '🫁', h: '4-7-8 breathing — morning and evening', p: '4 rounds twice daily. Under 5 minutes. Clinically shown to reduce cortisol within 2 minutes.' }); recs.push({ i: '🚶', h: '20-minute walk outside daily', p: 'Morning light and movement is one of the most effective natural cortisol reducers.' });
+                if (['weeks', 'months', 'longer'].includes(U.dur)) recs.push({ i: '🏥', h: 'Mention this to a GP', p: `Even mild stress lasting ${dur} is worth a brief check-in.` });
+            }
+            if (cats.includes('relationship')) recs.push({ i: '💜', h: 'Remember: happiness begins within you', p: 'Before you can have healthy relationships with others, you need a healthy relationship with yourself. This is not a cliché — it is neuroscience.' });
+            if (cats.includes('teen') || cats.includes('social')) recs.push({ i: '💜', h: 'Visit ReachOut.com', p: 'Resources designed specifically for young people dealing with bullying, social media, and peer pressure.' });
+            if (cats.includes('spiritual')) recs.push({ i: '✨', h: 'Reconnect with your faith or spiritual practice', p: 'Prayer, quiet reflection, and talking to a spiritual leader can provide profound support alongside professional care.' });
+            if (U.occ === 'retired' || U.age >= 60) recs.push({ i: '🌅', h: 'Daily gentle exercise', p: 'Chair yoga, slow walking, and deep breathing — 15–20 minutes daily — are proven to improve mood and cognitive health for seniors.' });
+            recs.push({ i: '💬', h: 'Talk to one trusted person today', p: 'A friend, family member, or counsellor. Saying your stress out loud reduces its neurological intensity.' });
+            const rr = document.getElementById('s-rec'); rr.innerHTML = '';
+            recs.forEach(r => { const d = document.createElement('div'); d.className = 'ri2'; d.innerHTML = `<div class="rii">${r.i}</div><div><h4>${r.h}</h4><p>${r.p}</p></div>`; rr.appendChild(d); });
+            document.getElementById('end-ov').classList.add('on');
+        }
+
+        /* ── NAVIGATION ── */
+        function G(id) { document.querySelectorAll('.scr').forEach(s => s.classList.add('off')); document.getElementById(id).classList.remove('off'); }
+        function selG(g, el) { selGender = g; document.querySelectorAll('.g-opt').forEach(e => e.classList.remove('on')); el.classList.add('on'); }
+        function selO(o, el) { selOcc = o; document.querySelectorAll('.o-opt').forEach(e => e.classList.remove('on')); el.classList.add('on'); }
+        function skipBack() { G('sp'); }
+        function startChat() {
+            const name = document.getElementById('fn').value.trim();
+            const age = parseInt(document.getElementById('fa').value) || 0;
+            const dur = document.getElementById('fd').value;
+            U = { name, age, gender: selGender, occ: selOcc, dur };
+            G('sc');
+            const nm = name ? `, ${name}` : '';
+            const durMsg = { today: "You mentioned this started today — tell me what's been happening.", days: "A few days of feeling this way is worth paying attention to.", week: "About a week — let's understand what's been going on.", weeks: "Two to four weeks is significant. I'm glad you're here.", months: "More than a month — I want to make sure you get the right support.", longer: "Several months or longer. That's a long time to carry this, and I genuinely want to help." };
+            const occHint = { student: " As a student, I know the pressures can feel enormous.", worker: " Work pressure can be relentless.", retired: " This stage of life brings its own unique challenges.", other: "" };
+            const greeting = `Hi${nm}! 👋 I'm Mind-Guard — a safe, private space to talk about anything.\n\n${durMsg[dur] || "How are you feeling right now?"}${occHint[selOcc] || ''}\n\nYou can share as much or as little as you like. What's been on your mind?`;
+            setTimeout(() => {
+                addBot(greeting, 'safe', '');
+                const isTeen = age > 0 && age <= 19, isSenior = age >= 60 || selOcc === 'retired';
+                const initC = isTeen ? ['Bullying at school', 'Social media stress', 'Friend or relationship issue', 'I feel alone', 'Family pressure', 'I feel really tired'] :
+                    isSenior ? ['I feel tired and heavy', 'Family pressure', 'Feeling lonely', 'Trouble sleeping', 'Senior wellness guide', 'Tell me more'] :
+                        selOcc === 'student' ? ['Can\'t focus on studying', 'School pressure', 'Feeling alone', 'Family expectations', 'I feel really tired', 'Tell me more'] :
+                            selOcc === 'worker' ? ['Work is too much', 'Boss pressure', 'Can\'t switch off', 'Feeling burned out', 'I feel really tired', 'Tell me more'] :
+                                ['I feel really tired', 'Family pressure', 'Work stress', 'Not sleeping well', 'I feel alone', 'Tell me more'];
+                setChips(initC);
+            }, 300);
+        }
+        function restart() {
+            turn = 0; lastLv = 'safe'; lastInp = ''; busy = false; sessionDone = false;
+            highT = 0; modT = 0; allCats = new Set(); docGiven = false; checkpointShown = false;
+            selGender = ''; selOcc = ''; U = { name: '', age: 0, gender: '', occ: '', dur: '' };
+            apiMessages = []; // clear conversation history
+            document.getElementById('msgs').innerHTML = '';
+            document.getElementById('chips').innerHTML = '';
+            document.getElementById('meter').style.display = 'none';
+            document.getElementById('tbg').className = 'tbg bok'; document.getElementById('tbg').textContent = 'Safe';
+            document.getElementById('tstat').textContent = 'Online · Safe space';
+            document.getElementById('end-ov').classList.remove('on');
+            document.getElementById('fn').value = ''; document.getElementById('fa').value = ''; document.getElementById('fd').value = '';
+            document.querySelectorAll('.g-opt,.o-opt').forEach(e => e.classList.remove('on'));
+            G('si');
+        }
+
+        /* ── URL PARAMETER AUTO-FILL ─────────────────────────────────────────
+           Supports: ?name=Budi&age=22&gender=male&occ=student&dur=weeks&lang=id&skip=intake
+           - If skip=intake is set (and at least one profile param), goes straight to chat.
+           - Otherwise pre-fills the intake form.
+        ────────────────────────────────────────────────────────────────────── */
+        (function initURLParams() {
+            const p = new URLSearchParams(window.location.search);
+            const name   = p.get('name');
+            const age    = p.get('age');
+            const gender = p.get('gender');   // female | male | other
+            const occ    = p.get('occ');      // student | worker | retired | other
+            const dur    = p.get('dur');      // today | days | week | weeks | months | longer
+            const skip   = p.get('skip');     // 'intake'
+
+            if (name)   document.getElementById('fn').value = name;
+            if (age)    document.getElementById('fa').value = age;
+            if (dur)    document.getElementById('fd').value = dur;
+
+            if (gender) {
+                selGender = gender;
+                document.querySelectorAll('.g-opt').forEach(el => {
+                    if ((el.getAttribute('onclick') || '').includes(`'${gender}'`)) el.classList.add('on');
+                });
+            }
+            if (occ) {
+                selOcc = occ;
+                document.querySelectorAll('.o-opt').forEach(el => {
+                    if ((el.getAttribute('onclick') || '').includes(`'${occ}'`)) el.classList.add('on');
+                });
+            }
+
+            const hasAnyParam = name || age || gender || occ || dur;
+            if (skip === 'intake' && hasAnyParam) {
+                startChat();
+            } else if (hasAnyParam) {
+                G('si'); // jump to intake form, already pre-filled
+            }
+        })();
+    </script>
+
+</body>
+
+</html>
