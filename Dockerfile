@@ -16,15 +16,15 @@ RUN pip install --no-cache-dir -r requirements.txt \
 COPY app.py .
 COPY index.html .
 
-# Port yang akan di-expose (CapRover akan proxy ke sini)
-EXPOSE 5000
+# Port yang akan di-expose (default CapRover = 80)
+EXPOSE 80
 
 # Jalankan dengan Gunicorn (production-grade, bukan Flask dev server)
 # - 2 worker processes
 # - timeout 120s (untuk streaming SSE)
 # - bind ke semua interface
 CMD ["gunicorn", \
-     "--bind", "0.0.0.0:5000", \
+     "--bind", "0.0.0.0:80", \
      "--workers", "2", \
      "--timeout", "120", \
      "--worker-class", "sync", \

@@ -1294,6 +1294,730 @@
         #toast.on {
             opacity: 1;
         }
+
+        /* QUOTE OF THE DAY — Glassmorphism */
+        .qotd {
+            width: 100%;
+            max-width: 360px;
+            background: linear-gradient(135deg,
+                    rgba(48, 190, 132, .18) 0%,
+                    rgba(28, 36, 32, .55) 60%,
+                    rgba(48, 190, 132, .08) 100%);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(48, 190, 132, .35);
+            border-left: 3px solid var(--tl);
+            border-radius: 16px;
+            padding: 14px 16px;
+            margin-bottom: 1.2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 0 0 1px rgba(48, 190, 132, .08),
+                0 8px 32px rgba(0, 0, 0, .45),
+                0 0 40px rgba(48, 190, 132, .08) inset;
+            animation: qFadeIn .65s cubic-bezier(.22, 1, .36, 1) both;
+            animation-delay: .12s;
+        }
+
+        /* shimmer orb top-right */
+        .qotd::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(circle, rgba(48, 190, 132, .22) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* subtle bottom line reflection */
+        .qotd::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 12px;
+            right: 12px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(48, 190, 132, .25), transparent);
+            pointer-events: none;
+        }
+
+        @keyframes qFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px) scale(.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .qotd-label {
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--tl);
+            margin-bottom: 9px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: .9;
+        }
+
+        .qotd-label::before {
+            content: '✦';
+            font-size: 8px;
+            filter: drop-shadow(0 0 4px var(--tl));
+        }
+
+        .qotd-text {
+            font-family: var(--fh);
+            font-size: 14.5px;
+            font-style: italic;
+            color: #d8f0e6;
+            line-height: 1.65;
+            margin-bottom: 9px;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, .4);
+        }
+
+        .qotd-author {
+            font-size: 11px;
+            color: var(--tl);
+            text-align: right;
+            opacity: .7;
+            letter-spacing: .3px;
+        }
+
+        /* ══════════════════════════════════════════════
+           MOOD CHECK-IN SCREEN (#sm)
+        ══════════════════════════════════════════════ */
+        #sm {
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            background: radial-gradient(ellipse 120% 60% at 50% 0%, #183028, #0F1412);
+        }
+
+        .mood-title {
+            font-family: var(--fh);
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .mood-sub {
+            font-size: 12.5px;
+            color: var(--ink2);
+            text-align: center;
+            max-width: 280px;
+            line-height: 1.7;
+            margin-bottom: 1.8rem;
+        }
+
+        .mood-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 1.6rem;
+            width: 100%;
+            max-width: 360px;
+        }
+
+        .mood-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 12px 4px 10px;
+            background: var(--cd);
+            border: 1.5px solid var(--bdr);
+            border-radius: 14px;
+            cursor: pointer;
+            transition: all .2s cubic-bezier(.22, 1, .36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mood-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity .2s;
+            border-radius: 12px;
+        }
+
+        .mood-btn[data-v="1"]::before {
+            background: radial-gradient(circle at 50% 30%, rgba(224, 72, 72, .18), transparent 70%);
+        }
+
+        .mood-btn[data-v="2"]::before {
+            background: radial-gradient(circle at 50% 30%, rgba(232, 168, 64, .16), transparent 70%);
+        }
+
+        .mood-btn[data-v="3"]::before {
+            background: radial-gradient(circle at 50% 30%, rgba(255, 200, 50, .14), transparent 70%);
+        }
+
+        .mood-btn[data-v="4"]::before {
+            background: radial-gradient(circle at 50% 30%, rgba(48, 190, 132, .14), transparent 70%);
+        }
+
+        .mood-btn[data-v="5"]::before {
+            background: radial-gradient(circle at 50% 30%, rgba(96, 168, 240, .16), transparent 70%);
+        }
+
+        .mood-btn.on::before {
+            opacity: 1;
+        }
+
+        .mood-btn[data-v="1"].on {
+            border-color: var(--rd);
+            box-shadow: 0 0 14px rgba(224, 72, 72, .25);
+        }
+
+        .mood-btn[data-v="2"].on {
+            border-color: var(--am);
+            box-shadow: 0 0 14px rgba(232, 168, 64, .25);
+        }
+
+        .mood-btn[data-v="3"].on {
+            border-color: var(--go);
+            box-shadow: 0 0 14px rgba(255, 200, 50, .25);
+        }
+
+        .mood-btn[data-v="4"].on {
+            border-color: var(--tl);
+            box-shadow: 0 0 14px rgba(48, 190, 132, .25);
+        }
+
+        .mood-btn[data-v="5"].on {
+            border-color: var(--bl);
+            box-shadow: 0 0 14px rgba(96, 168, 240, .25);
+        }
+
+        .mood-btn:hover {
+            transform: translateY(-3px);
+            border-color: var(--bdr2);
+        }
+
+        .mood-btn.on {
+            transform: translateY(-3px);
+        }
+
+        .mood-emoji {
+            font-size: 26px;
+            line-height: 1;
+        }
+
+        .mood-label {
+            font-size: 9.5px;
+            font-weight: 600;
+            text-align: center;
+            color: var(--ink2);
+            line-height: 1.3;
+        }
+
+        .mood-btn[data-v="1"].on .mood-label {
+            color: var(--rd);
+        }
+
+        .mood-btn[data-v="2"].on .mood-label {
+            color: var(--am);
+        }
+
+        .mood-btn[data-v="3"].on .mood-label {
+            color: var(--go);
+        }
+
+        .mood-btn[data-v="4"].on .mood-label {
+            color: var(--tl);
+        }
+
+        .mood-btn[data-v="5"].on .mood-label {
+            color: var(--bl);
+        }
+
+        .mood-bar-wrap {
+            width: 100%;
+            max-width: 360px;
+            margin-bottom: 1.6rem;
+        }
+
+        .mood-bar-track {
+            height: 4px;
+            background: var(--bdr);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .mood-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            width: 0%;
+            transition: width .4s cubic-bezier(.22, 1, .36, 1), background .4s;
+            background: var(--rd);
+        }
+
+        .mood-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9.5px;
+            color: var(--mt);
+        }
+
+        .mood-continue {
+            width: 100%;
+            max-width: 360px;
+            background: var(--tl);
+            color: #071810;
+            border: none;
+            border-radius: 13px;
+            padding: 14px;
+            font-family: var(--fb);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: background .18s, transform .12s, opacity .2s;
+            opacity: .35;
+            pointer-events: none;
+        }
+
+        .mood-continue.ready {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .mood-continue:hover {
+            background: var(--tld);
+        }
+
+        .mood-continue:active {
+            transform: scale(.97);
+        }
+
+        .mood-skip {
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--mt);
+            text-align: center;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* ══════════════════════════════════════════════
+           BREATHING & GROUNDING MODAL (#breath-modal)
+        ══════════════════════════════════════════════ */
+        #breath-modal {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 14, 12, .92);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+            padding: 1.2rem 1.4rem 2rem;
+        }
+
+        #breath-modal.on {
+            display: flex;
+        }
+
+        .bm-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .bm-title {
+            font-family: var(--fh);
+            font-size: 18px;
+        }
+
+        .bm-close {
+            width: 32px;
+            height: 32px;
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--ink2);
+            transition: all .15s;
+        }
+
+        .bm-close:hover {
+            background: var(--bdr);
+            color: var(--ink);
+        }
+
+        .bm-tabs {
+            display: flex;
+            gap: 6px;
+            background: var(--cd);
+            border-radius: 12px;
+            padding: 4px;
+            width: 100%;
+            margin-bottom: 1.4rem;
+        }
+
+        .bm-tab {
+            flex: 1;
+            padding: 8px 4px;
+            border-radius: 9px;
+            font-size: 12.5px;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            color: var(--ink2);
+            transition: all .2s;
+        }
+
+        .bm-tab.on {
+            background: var(--tll);
+            color: var(--tl);
+        }
+
+        /* ── Breathing mode ── */
+        .breath-pane,
+        .ground-pane {
+            width: 100%;
+        }
+
+        .breath-pane.hide,
+        .ground-pane.hide {
+            display: none;
+        }
+
+        .breath-tech-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 1.2rem;
+        }
+
+        .bt-opt {
+            flex: 1;
+            background: var(--cd);
+            border: 1px solid var(--bdr2);
+            border-radius: 10px;
+            padding: 8px 4px;
+            font-size: 11px;
+            color: var(--ink2);
+            text-align: center;
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .bt-opt.on {
+            background: var(--tll);
+            border-color: var(--tl);
+            color: var(--tl);
+            font-weight: 600;
+        }
+
+        .breath-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .breath-ring-wrap {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .breath-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2.5px solid rgba(48, 190, 132, .25);
+            transition: transform 1s ease-in-out, border-color .5s;
+        }
+
+        .breath-ring.inhale {
+            animation: bRingIn var(--breath-in, 4s) ease-in-out forwards;
+            border-color: var(--tl);
+        }
+
+        .breath-ring.hold {
+            animation: none;
+            border-color: var(--am);
+            transform: scale(1.18);
+        }
+
+        .breath-ring.exhale {
+            animation: bRingOut var(--breath-out, 8s) ease-in-out forwards;
+            border-color: var(--bl);
+        }
+
+        @keyframes bRingIn {
+            from {
+                transform: scale(1);
+                box-shadow: 0 0 0px rgba(48, 190, 132, 0);
+            }
+
+            to {
+                transform: scale(1.18);
+                box-shadow: 0 0 40px rgba(48, 190, 132, .22);
+            }
+        }
+
+        @keyframes bRingOut {
+            from {
+                transform: scale(1.18);
+                box-shadow: 0 0 40px rgba(48, 190, 132, .22);
+            }
+
+            to {
+                transform: scale(1);
+                box-shadow: 0 0 0px rgba(96, 168, 240, 0);
+            }
+        }
+
+        .breath-inner {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(48, 190, 132, .12), rgba(28, 36, 32, .6));
+            border: 1.5px solid rgba(48, 190, 132, .2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2px;
+        }
+
+        .breath-phase {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--tl);
+            letter-spacing: .5px;
+            text-transform: uppercase;
+            transition: color .3s;
+        }
+
+        .breath-phase.hold-color {
+            color: var(--am);
+        }
+
+        .breath-phase.exhale-color {
+            color: var(--bl);
+        }
+
+        .breath-count {
+            font-family: var(--fh);
+            font-size: 30px;
+            color: var(--ink);
+            line-height: 1;
+        }
+
+        .breath-cycle-info {
+            font-size: 11px;
+            color: var(--mt);
+        }
+
+        .breath-ctrl {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+
+        .breath-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 12px;
+            border: none;
+            font-family: var(--fb);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .breath-btn.start-btn {
+            background: var(--tl);
+            color: #071810;
+        }
+
+        .breath-btn.start-btn:hover {
+            background: var(--tld);
+        }
+
+        .breath-btn.stop-btn {
+            background: var(--cd);
+            color: var(--ink2);
+            border: 1px solid var(--bdr2);
+        }
+
+        .breath-btn.stop-btn:hover {
+            background: var(--bdr);
+        }
+
+        /* ── Grounding mode ── */
+        .ground-intro {
+            font-size: 13px;
+            color: var(--ink2);
+            line-height: 1.7;
+            text-align: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .ground-step {
+            background: linear-gradient(135deg, rgba(48, 190, 132, .1), rgba(28, 36, 32, .5));
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(48, 190, 132, .2);
+            border-left: 3px solid var(--tl);
+            border-radius: 14px;
+            padding: 14px 15px;
+            margin-bottom: 10px;
+            transition: all .3s ease;
+            opacity: .35;
+            transform: translateY(4px);
+        }
+
+        .ground-step.active {
+            opacity: 1;
+            transform: translateY(0);
+            border-color: rgba(48, 190, 132, .4);
+            border-left-color: var(--tl);
+        }
+
+        .ground-step.done {
+            opacity: .5;
+            border-left-color: var(--bdr2);
+        }
+
+        .ground-step-hdr {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .ground-num {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--tll);
+            border: 1.5px solid var(--tl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .ground-step.done .ground-num {
+            background: var(--bdr);
+            border-color: var(--bdr2);
+        }
+
+        .ground-step-label {
+            font-size: 13.5px;
+            font-weight: 600;
+            color: var(--ink);
+            flex: 1;
+        }
+
+        .ground-step-sub {
+            font-size: 11.5px;
+            color: var(--ink2);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .ground-inp {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid var(--bdr2);
+            border-radius: 9px;
+            padding: 8px 11px;
+            font-family: var(--fb);
+            font-size: 12.5px;
+            color: var(--ink);
+            outline: none;
+            resize: none;
+            min-height: 36px;
+            margin-bottom: 8px;
+            transition: border-color .2s;
+        }
+
+        .ground-inp:focus {
+            border-color: var(--tl);
+        }
+
+        .ground-next-btn {
+            width: 100%;
+            padding: 9px;
+            background: var(--tll);
+            border: 1px solid var(--tl);
+            border-radius: 9px;
+            color: var(--tl);
+            font-family: var(--fb);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all .15s;
+        }
+
+        .ground-next-btn:hover {
+            background: rgba(48, 190, 132, .18);
+        }
+
+        .ground-done-msg {
+            display: none;
+            text-align: center;
+            padding: 1.2rem 0;
+        }
+
+        .ground-done-msg.on {
+            display: block;
+        }
+
+        .ground-done-msg .gd-icon {
+            font-size: 40px;
+            margin-bottom: 8px;
+        }
+
+        .ground-done-msg h3 {
+            font-family: var(--fh);
+            font-size: 20px;
+            margin-bottom: 6px;
+            color: var(--tl);
+        }
+
+        .ground-done-msg p {
+            font-size: 12.5px;
+            color: var(--ink2);
+            line-height: 1.7;
+        }
     </style>
 
 </head>
@@ -1308,6 +2032,14 @@
             <h1 class="ph1">Mind-Guard <em>Asia</em></h1>
             <p class="psub">A safe, private space to talk — stress, school, work, family, relationships, or anything
                 weighing on you.</p>
+
+            <!-- QUOTE OF THE DAY -->
+            <div class="qotd" id="qotd-block">
+                <div class="qotd-label">Quote of the Day</div>
+                <p class="qotd-text" id="qotd-text"></p>
+                <p class="qotd-author" id="qotd-author"></p>
+            </div>
+
             <div class="pcard">
                 <div class="pr">
                     <div class="pi">🔒</div>
@@ -1379,6 +2111,51 @@
                     <button class="bgo" onclick="startChat()"><span>💬</span> Start my session</button>
                 </div>
             </div>
+        </div>
+
+        <!-- MOOD CHECK-IN -->
+        <div class="scr off" id="sm">
+            <div style="font-size:32px;margin-bottom:10px;">🌡️</div>
+            <h2 class="mood-title">How are you feeling<br><em style="color:var(--tl);font-style:italic;">right now?</em>
+            </h2>
+            <p class="mood-sub">This helps Mind-Guard understand your starting point and respond in the right way.</p>
+
+            <div class="mood-row">
+                <div class="mood-btn" data-v="1" onclick="selM(1,this)">
+                    <span class="mood-emoji">😞</span>
+                    <span class="mood-label">Very<br>Low</span>
+                </div>
+                <div class="mood-btn" data-v="2" onclick="selM(2,this)">
+                    <span class="mood-emoji">😟</span>
+                    <span class="mood-label">Not<br>Great</span>
+                </div>
+                <div class="mood-btn" data-v="3" onclick="selM(3,this)">
+                    <span class="mood-emoji">😐</span>
+                    <span class="mood-label">So-So</span>
+                </div>
+                <div class="mood-btn" data-v="4" onclick="selM(4,this)">
+                    <span class="mood-emoji">🙂</span>
+                    <span class="mood-label">Pretty<br>Good</span>
+                </div>
+                <div class="mood-btn" data-v="5" onclick="selM(5,this)">
+                    <span class="mood-emoji">😄</span>
+                    <span class="mood-label">Great!</span>
+                </div>
+            </div>
+
+            <div class="mood-bar-wrap">
+                <div class="mood-bar-track">
+                    <div class="mood-bar-fill" id="mood-bar"></div>
+                </div>
+                <div class="mood-bar-labels">
+                    <span>Low mood</span><span>High mood</span>
+                </div>
+            </div>
+
+            <button class="mood-continue" id="mood-continue-btn" onclick="continueMood()">
+                <span>💬</span> Continue to Chat
+            </button>
+            <div class="mood-skip" onclick="continueMood(true)">Skip this step</div>
         </div>
 
         <!-- CHAT -->
@@ -1454,6 +2231,107 @@
         </div>
     </div>
     <div id="toast"></div>
+
+    <!-- BREATHING & GROUNDING MODAL -->
+    <div id="breath-modal">
+        <div class="bm-header">
+            <div class="bm-title">🫁 Relax &amp; Ground</div>
+            <div class="bm-close" onclick="closeBreath()">✕</div>
+        </div>
+
+        <div class="bm-tabs">
+            <div class="bm-tab on" id="tab-breath" onclick="switchBreathTab('breath')">🫁 Breathing</div>
+            <div class="bm-tab" id="tab-ground" onclick="switchBreathTab('ground')">🌿 5-4-3-2-1 Grounding</div>
+        </div>
+
+        <!-- Breathing Pane -->
+        <div class="breath-pane" id="breath-pane">
+            <div class="breath-tech-row">
+                <div class="bt-opt on" id="bt-478" onclick="setTech('478',this)">4-7-8</div>
+                <div class="bt-opt" id="bt-box" onclick="setTech('box',this)">Box (4-4-4-4)</div>
+                <div class="bt-opt" id="bt-simple" onclick="setTech('simple',this)">Simple (4-4)</div>
+            </div>
+
+            <div class="breath-stage">
+                <div class="breath-ring-wrap">
+                    <div class="breath-ring" id="breath-ring"></div>
+                    <div class="breath-inner">
+                        <div class="breath-phase" id="breath-phase">Ready</div>
+                        <div class="breath-count" id="breath-count">—</div>
+                    </div>
+                </div>
+                <div class="breath-cycle-info" id="breath-cycle-info">Choose a technique and press Start</div>
+            </div>
+
+            <div class="breath-ctrl">
+                <button class="breath-btn start-btn" id="breath-start-btn" onclick="toggleBreathing()">▶ Start</button>
+                <button class="breath-btn stop-btn" onclick="closeBreath()">Done</button>
+            </div>
+        </div>
+
+        <!-- Grounding Pane -->
+        <div class="ground-pane hide" id="ground-pane">
+            <p class="ground-intro">Ground yourself in the present moment. Work through each sense — take your time with
+                each one.</p>
+
+            <div class="ground-step active" id="gs-0">
+                <div class="ground-step-hdr">
+                    <div class="ground-num">👁️</div>
+                    <div class="ground-step-label">5 things you can <strong>see</strong></div>
+                </div>
+                <p class="ground-step-sub">Look around slowly. Name 5 things you can see right now — big or small.</p>
+                <textarea class="ground-inp" placeholder="e.g. my phone, the ceiling, a plant…" rows="2"></textarea>
+                <button class="ground-next-btn" onclick="nextGround(0)">Done ✓ Next →</button>
+            </div>
+
+            <div class="ground-step" id="gs-1">
+                <div class="ground-step-hdr">
+                    <div class="ground-num">👂</div>
+                    <div class="ground-step-label">4 things you can <strong>hear</strong></div>
+                </div>
+                <p class="ground-step-sub">Listen carefully. What sounds are around you right now?</p>
+                <textarea class="ground-inp" placeholder="e.g. traffic, AC hum, birds…" rows="2"></textarea>
+                <button class="ground-next-btn" onclick="nextGround(1)">Done ✓ Next →</button>
+            </div>
+
+            <div class="ground-step" id="gs-2">
+                <div class="ground-step-hdr">
+                    <div class="ground-num">🤚</div>
+                    <div class="ground-step-label">3 things you can <strong>touch</strong></div>
+                </div>
+                <p class="ground-step-sub">Feel the textures around you. What can your hands or body feel?</p>
+                <textarea class="ground-inp" placeholder="e.g. chair fabric, warm air, my clothes…" rows="2"></textarea>
+                <button class="ground-next-btn" onclick="nextGround(2)">Done ✓ Next →</button>
+            </div>
+
+            <div class="ground-step" id="gs-3">
+                <div class="ground-step-hdr">
+                    <div class="ground-num">👃</div>
+                    <div class="ground-step-label">2 things you can <strong>smell</strong></div>
+                </div>
+                <p class="ground-step-sub">Take a slow breath in. What scents do you notice?</p>
+                <textarea class="ground-inp" placeholder="e.g. coffee, fresh air…" rows="2"></textarea>
+                <button class="ground-next-btn" onclick="nextGround(3)">Done ✓ Next →</button>
+            </div>
+
+            <div class="ground-step" id="gs-4">
+                <div class="ground-step-hdr">
+                    <div class="ground-num">👄</div>
+                    <div class="ground-step-label">1 thing you can <strong>taste</strong></div>
+                </div>
+                <p class="ground-step-sub">What can you taste right now? Even a subtle sensation counts.</p>
+                <textarea class="ground-inp" placeholder="e.g. mint, water, nothing in particular…" rows="2"></textarea>
+                <button class="ground-next-btn" onclick="nextGround(4)">Finish ✓</button>
+            </div>
+
+            <div class="ground-done-msg" id="ground-done">
+                <div class="gd-icon">🌿</div>
+                <h3>Well done.</h3>
+                <p>You just brought yourself fully into the present moment.<br>Take a slow breath. Notice how you feel
+                    right now.</p>
+            </div>
+        </div>
+    </div>
 
     <script>
         // ═══════════════════════════════════════
@@ -1694,12 +2572,12 @@ ${stepsHtml}</div>`;
         }
 
         function cardBreath() {
-            return `<div class="cc ct"><div class="ccttl">🫁 4-7-8 Breathing — Try Right Now</div>
+            return `<div class="cc ct"><div class="ccttl">🫁 4-7-8 Breathing</div>
 <div class="cs"><div class="cn" style="background:var(--tl);color:#071810">1</div><span>Sit comfortably, close your eyes</span></div>
 <div class="cs"><div class="cn" style="background:var(--tl);color:#071810">2</div><span>Inhale through your nose — <strong style="color:var(--tl)">4 seconds</strong></span></div>
 <div class="cs"><div class="cn" style="background:var(--tl);color:#071810">3</div><span>Hold your breath — <strong style="color:var(--tl)">7 seconds</strong></span></div>
 <div class="cs"><div class="cn" style="background:var(--tl);color:#071810">4</div><span>Exhale slowly — <strong style="color:var(--tl)">8 seconds</strong></span></div>
-<div class="cs"><div class="cn" style="background:var(--tl);color:#071810">5</div><span>Repeat <strong style="color:var(--tl)">4 times</strong></span></div></div>`;
+<button class="bgo" style="margin-top:8px;padding:9px;font-size:12px;" onclick="openBreath('breath')">▶ Start Interactive Exercise</button></div>`;
         }
 
         function cardJournal() {
@@ -1847,8 +2725,8 @@ ${stepsHtml}</div>`;
             if (t.match(/breath|meditat|relax|calm/)) return ['Show me breathing resources', 'Show me meditation resources', 'Show me exercise visuals', 'There is more to share'];
             if (t.match(/exercise|yoga|walk|sport|workout/)) return ['Show me exercise visuals', 'Show me breathing resources', 'Tell me more about my feelings', 'There is more to share'];
             if (t.match(/senior|elder|retired|older adult|parent.*stress|grandp/) || U.occ === 'retired') return ['Senior wellness guide', 'Show me gentle exercises', 'Show me meditation resources', 'There is more to share'];
-            if (lv === 'mild') return ['I tried the breathing', 'Show me relaxation resources', 'Show me exercise visuals', 'There is more to share'];
-            if (lv === 'mod') return ['Show me meditation resources', 'Show me helpful websites', 'I need stronger support', 'There is more to share'];
+            if (lv === 'mild') return ['Start breathing exercise', 'Show me relaxation resources', 'Show me exercise visuals', 'There is more to share'];
+            if (lv === 'mod') return ['Try grounding exercise', 'Show me meditation resources', 'I need stronger support', 'There is more to share'];
             if (lv === 'high') return ['How do I find help', 'Show me support resources', 'There is more to share'];
             return ['I feel really tired', 'Family pressure', 'Work stress', 'School problems', 'I feel alone', 'There is more to share'];
         }
@@ -1885,6 +2763,7 @@ ${stepsHtml}</div>`;
             const gMap = { female: 'female/perempuan', male: 'male/laki-laki', other: 'other/lainnya' };
             const oMap = { student: 'student/pelajar', worker: 'worker/karyawan', retired: 'retired/pensiunan', other: 'other/lainnya' };
             const dMap = { today: 'just today', days: 'a few days', week: 'about a week', weeks: '2–4 weeks', months: 'over a month', longer: 'several months or longer' };
+            const mLabel = user.moodLabel ? `Current Mood: ${user.moodLabel} (${user.mood}/5)` : 'Current Mood: unknown';
 
             return `${langRule}
 
@@ -1896,11 +2775,13 @@ USER PROFILE:
 - Gender: ${gMap[user.gender] || 'not specified'}
 - Status: ${oMap[user.occ] || 'not specified'}
 - Duration feeling this way: ${dMap[user.dur] || 'not specified'}
+- ${mLabel}
 
 HOW TO SPEAK:
 - ${langRule}
 - Talk like a true friend — warm, natural, honest, never stiff
 - Do NOT jump straight to solutions — first validate their feelings, make them feel heard
+- If their mood is low (1 or 2), be extra gentle and empathetic
 - Always end with ONE personal, sincere follow-up question
 - Use their name occasionally if provided
 - Keep responses to 2–4 sentences only — this is not a lecture
@@ -1943,7 +2824,7 @@ YOUR MISSION: Make the user feel heard, understood, and not alone. You are their
 
             // Level-based cards
             if (res.lv === 'mild') return cardBreath() + (isTeen ? cardRes('teen') : '') + (dc || '');
-            if (res.lv === 'mod')  return cardJournal() + cardRes('meditation') + (dc || '');
+            if (res.lv === 'mod') return cardJournal() + cardRes('meditation') + (dc || '');
             if (res.lv === 'high') return cardCounsel() + cardRes('motivation') + (dc || '');
 
             return dc || '';
@@ -2001,6 +2882,8 @@ YOUR MISSION: Make the user feel heard, understood, and not alone. You are their
             if (L.includes('relationship advice') || L.includes('friendship advice')) { addUser(label); setTimeout(() => addBot('Here is guidance and wisdom for relationships:', 'safe', cardRelationship(L.includes('friend') ? 'friendship' : 'general')), 400); setChips(['Show me motivation resources', 'Tell me more about my situation']); return; }
             if (L.includes('spiritual guidance')) { addUser(label); setTimeout(() => addBot('Here is a moment of spiritual reflection:', 'safe', cardSpiritual(U.name)), 400); setChips(['Show me meditation resources', 'Tell me more']); return; }
             if (L.includes('activities')) { addUser(label); setTimeout(() => addBot('Here are some activities that can genuinely shift your mood:', 'safe', cardActivities()), 400); setChips(['Show me exercise visuals', 'Show me breathing resources', 'Tell me more']); return; }
+            if (L.includes('start breathing exercise')) { openBreath('breath'); return; }
+            if (L.includes('try grounding exercise')) { openBreath('ground'); return; }
             if (L.includes('yes, this has helped') || L.includes('take me to my summary')) { addUser(label); showTyping(); setTimeout(() => { const ti = document.getElementById('ti'); if (ti) ti.remove(); showSummary(); }, 900); return; }
             if (L.includes('explore one more')) { handleCheckpoint(label); return; }
             document.getElementById('inp').value = label; send();
@@ -2052,9 +2935,9 @@ YOUR MISSION: Make the user feel heard, understood, and not alone. You are their
 
             // ── End triggers ──
             const bye = ['thanks', 'thank you', 'bye', 'goodbye', 'done', 'finish',
-                         'end session', 'im done', "i'm done", "that's all",
-                         "i feel better", "i'm okay now", 'im okay now', 'no more',
-                         'makasih', 'terima kasih', 'udahan', 'selesai', 'sudah cukup'];
+                'end session', 'im done', "i'm done", "that's all",
+                "i feel better", "i'm okay now", 'im okay now', 'no more',
+                'makasih', 'terima kasih', 'udahan', 'selesai', 'sudah cukup'];
             if (bye.some(w => txt.toLowerCase().includes(w))) {
                 showTyping();
                 setTimeout(() => {
@@ -2124,18 +3007,18 @@ YOUR MISSION: Make the user feel heard, understood, and not alone. You are their
 
                 // Create streaming message bubble
                 const msgs = document.getElementById('msgs');
-                const w   = document.createElement('div');
+                const w = document.createElement('div');
                 w.className = 'msg b';
-                const av  = document.createElement('div');
+                const av = document.createElement('div');
                 av.className = 'av'; av.textContent = '🧠';
-                const b   = document.createElement('div');
+                const b = document.createElement('div');
                 b.className = 'bub';
                 w.appendChild(av); w.appendChild(b);
                 msgs.appendChild(w);
                 scrollD();
 
                 // Read SSE stream chunk by chunk
-                const reader  = response.body.getReader();
+                const reader = response.body.getReader();
                 const decoder = new TextDecoder();
                 let aiText = '';
                 let buffer = '';
@@ -2175,7 +3058,7 @@ YOUR MISSION: Make the user feel heard, understood, and not alone. You are their
                 // Update stress UI
                 updateUI(res.lv || 'check', res.cats);
                 lastInp = txt;
-                lastLv  = res.lv || 'check';
+                lastLv = res.lv || 'check';
 
                 // Checkpoint check or chips
                 if (shouldCheckpoint()) {
@@ -2244,26 +3127,64 @@ YOUR MISSION: Make the user feel heard, understood, and not alone. You are their
         function selG(g, el) { selGender = g; document.querySelectorAll('.g-opt').forEach(e => e.classList.remove('on')); el.classList.add('on'); }
         function selO(o, el) { selOcc = o; document.querySelectorAll('.o-opt').forEach(e => e.classList.remove('on')); el.classList.add('on'); }
         function skipBack() { G('sp'); }
+        /* ── MOOD CHECK-IN ── */
+        let selMood = 0;
+        function selM(v, el) {
+            selMood = v;
+            document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('on'));
+            el.classList.add('on');
+            const perc = (v - 1) * 25;
+            const bar = document.getElementById('mood-bar');
+            bar.style.width = perc + '%';
+            
+            const cols = { 1: 'var(--rd)', 2: 'var(--am)', 3: 'var(--go)', 4: 'var(--tl)', 5: 'var(--bl)' };
+            bar.style.background = cols[v];
+            
+            document.getElementById('mood-continue-btn').classList.add('ready');
+        }
+
+        function continueMood(skip = false) {
+            if (!skip && selMood > 0) {
+                U.mood = selMood;
+                const mLabels = { 1: 'very low', 2: 'not great', 3: 'so-so', 4: 'pretty good', 5: 'great' };
+                U.moodLabel = mLabels[selMood];
+            } else {
+                U.mood = 0;
+                U.moodLabel = '';
+            }
+            G('sc');
+            
+            const nm = U.name ? `, ${U.name}` : '';
+            const durMsg = { today: "You mentioned this started today — tell me what's been happening.", days: "A few days of feeling this way is worth paying attention to.", week: "About a week — let's understand what's been going on.", weeks: "Two to four weeks is significant. I'm glad you're here.", months: "More than a month — I want to make sure you get the right support.", longer: "Several months or longer. That's a long time to carry this, and I genuinely want to help." };
+            const occHint = { student: " As a student, I know the pressures can feel enormous.", worker: " Work pressure can be relentless.", retired: " This stage of life brings its own unique challenges.", other: "" };
+            
+            let moodGreeting = '';
+            if (!skip && selMood > 0) {
+                if (selMood <= 2) moodGreeting = "I see your mood is quite low right now. I'm really glad you decided to open Mind-Guard. ";
+                else if (selMood === 3) moodGreeting = "I see you're feeling so-so today. ";
+                else if (selMood >= 4) moodGreeting = "I'm glad to see you're feeling relatively okay today. ";
+            }
+            
+            const greeting = `Hi${nm}! 👋 I'm Mind-Guard — a safe, private space to talk about anything.\n\n${moodGreeting}${durMsg[U.dur] || "How are you feeling overall?"}${occHint[U.occ] || ''}\n\nYou can share as much or as little as you like. What's been on your mind?`;
+            
+            setTimeout(() => {
+                addBot(greeting, 'safe', '');
+                const isTeen = U.age > 0 && U.age <= 19, isSenior = U.age >= 60 || U.occ === 'retired';
+                const initC = isTeen ? ['Bullying at school', 'Social media stress', 'Friend or relationship issue', 'I feel alone', 'Family pressure', 'I feel really tired'] :
+                    isSenior ? ['I feel tired and heavy', 'Family pressure', 'Feeling lonely', 'Trouble sleeping', 'Senior wellness guide', 'Tell me more'] :
+                        U.occ === 'student' ? ['Can\'t focus on studying', 'School pressure', 'Feeling alone', 'Family expectations', 'I feel really tired', 'Tell me more'] :
+                            U.occ === 'worker' ? ['Work is too much', 'Boss pressure', 'Can\'t switch off', 'Feeling burned out', 'I feel really tired', 'Tell me more'] :
+                                ['I feel really tired', 'Family pressure', 'Work stress', 'Not sleeping well', 'I feel alone', 'Tell me more'];
+                setChips(initC);
+            }, 300);
+        }
+
         function startChat() {
             const name = document.getElementById('fn').value.trim();
             const age = parseInt(document.getElementById('fa').value) || 0;
             const dur = document.getElementById('fd').value;
-            U = { name, age, gender: selGender, occ: selOcc, dur };
-            G('sc');
-            const nm = name ? `, ${name}` : '';
-            const durMsg = { today: "You mentioned this started today — tell me what's been happening.", days: "A few days of feeling this way is worth paying attention to.", week: "About a week — let's understand what's been going on.", weeks: "Two to four weeks is significant. I'm glad you're here.", months: "More than a month — I want to make sure you get the right support.", longer: "Several months or longer. That's a long time to carry this, and I genuinely want to help." };
-            const occHint = { student: " As a student, I know the pressures can feel enormous.", worker: " Work pressure can be relentless.", retired: " This stage of life brings its own unique challenges.", other: "" };
-            const greeting = `Hi${nm}! 👋 I'm Mind-Guard — a safe, private space to talk about anything.\n\n${durMsg[dur] || "How are you feeling right now?"}${occHint[selOcc] || ''}\n\nYou can share as much or as little as you like. What's been on your mind?`;
-            setTimeout(() => {
-                addBot(greeting, 'safe', '');
-                const isTeen = age > 0 && age <= 19, isSenior = age >= 60 || selOcc === 'retired';
-                const initC = isTeen ? ['Bullying at school', 'Social media stress', 'Friend or relationship issue', 'I feel alone', 'Family pressure', 'I feel really tired'] :
-                    isSenior ? ['I feel tired and heavy', 'Family pressure', 'Feeling lonely', 'Trouble sleeping', 'Senior wellness guide', 'Tell me more'] :
-                        selOcc === 'student' ? ['Can\'t focus on studying', 'School pressure', 'Feeling alone', 'Family expectations', 'I feel really tired', 'Tell me more'] :
-                            selOcc === 'worker' ? ['Work is too much', 'Boss pressure', 'Can\'t switch off', 'Feeling burned out', 'I feel really tired', 'Tell me more'] :
-                                ['I feel really tired', 'Family pressure', 'Work stress', 'Not sleeping well', 'I feel alone', 'Tell me more'];
-                setChips(initC);
-            }, 300);
+            U = { name, age, gender: selGender, occ: selOcc, dur, mood: 0, moodLabel: '' };
+            G('sm'); // Go to mood screen first
         }
         function restart() {
             turn = 0; lastLv = 'safe'; lastInp = ''; busy = false; sessionDone = false;
@@ -2288,16 +3209,16 @@ YOUR MISSION: Make the user feel heard, understood, and not alone. You are their
         ────────────────────────────────────────────────────────────────────── */
         (function initURLParams() {
             const p = new URLSearchParams(window.location.search);
-            const name   = p.get('name');
-            const age    = p.get('age');
+            const name = p.get('name');
+            const age = p.get('age');
             const gender = p.get('gender');   // female | male | other
-            const occ    = p.get('occ');      // student | worker | retired | other
-            const dur    = p.get('dur');      // today | days | week | weeks | months | longer
-            const skip   = p.get('skip');     // 'intake'
+            const occ = p.get('occ');      // student | worker | retired | other
+            const dur = p.get('dur');      // today | days | week | weeks | months | longer
+            const skip = p.get('skip');     // 'intake'
 
-            if (name)   document.getElementById('fn').value = name;
-            if (age)    document.getElementById('fa').value = age;
-            if (dur)    document.getElementById('fd').value = dur;
+            if (name) document.getElementById('fn').value = name;
+            if (age) document.getElementById('fa').value = age;
+            if (dur) document.getElementById('fd').value = dur;
 
             if (gender) {
                 selGender = gender;
@@ -2319,6 +3240,204 @@ YOUR MISSION: Make the user feel heard, understood, and not alone. You are their
                 G('si'); // jump to intake form, already pre-filled
             }
         })();
+
+        /* ── QUOTE OF THE DAY ─────────────────────────────── */
+        (function () {
+            const quotes = [
+                { text: "You don't have to control your thoughts. You just have to stop letting them control you.", author: "Dan Millman" },
+                { text: "Self-care is not self-indulgence, it is self-preservation.", author: "Audre Lorde" },
+                { text: "There is hope, even when your brain tells you there isn't.", author: "John Green" },
+                { text: "You are not your illness. You have an individual story to tell.", author: "Julian Seifter" },
+                { text: "It's okay to not be okay — as long as you are not giving up.", author: "Karen Salmansohn" },
+                { text: "Tough times never last, but tough people do.", author: "Robert H. Schuller" },
+                { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" },
+                { text: "Even the darkest night will end, and the sun will rise.", author: "Victor Hugo" },
+                { text: "You are enough, just as you are.", author: "Meghan Markle" },
+                { text: "Happiness can be found even in the darkest of times, if one only remembers to turn on the light.", author: "Albus Dumbledore" },
+                { text: "Healing is not linear. Be patient with yourself.", author: "Unknown" },
+                { text: "Sometimes the bravest thing you can do is ask for help.", author: "Unknown" },
+                { text: "Your mental health is a priority. Your happiness is essential. Your self-care is a necessity.", author: "Unknown" },
+                { text: "Be gentle with yourself. You are a child of the universe, no less than the trees and the stars.", author: "Max Ehrmann" },
+                { text: "Out of difficulties grow miracles.", author: "Jean de La Bruyère" },
+                { text: "In the middle of every difficulty lies opportunity.", author: "Albert Einstein" },
+                { text: "You are stronger than you think, braver than you believe, and smarter than you know.", author: "A.A. Milne" },
+                { text: "The present moment is the only moment available to us, and it is the door to all moments.", author: "Thich Nhat Hanh" },
+                { text: "Not all storms come to disrupt your life. Some come to clear your path.", author: "Unknown" },
+                { text: "Rest is not idleness — it is the work of recharging your soul.", author: "Unknown" },
+                { text: "Breathe. You're going to be okay.", author: "Unknown" },
+                { text: "Your feelings are valid. Your struggles are real. And you are not alone.", author: "Unknown" },
+                { text: "One small crack does not mean that you are broken. It means that you were put to the test.", author: "Linda Poindexter" },
+                { text: "Taking care of yourself is the most powerful way to begin to take care of others.", author: "Bryant McGill" },
+                { text: "The good life is not one immune to sadness but one in which suffering contributes to our growth.", author: "Alain de Botton" }
+            ];
+
+            const q = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('qotd-text').textContent = '\u201C' + q.text + '\u201D';
+            document.getElementById('qotd-author').textContent = '— ' + q.author;
+        })();
+
+        /* ── BREATHING & GROUNDING ENGINE ── */
+        let bMode = 'breath', bTech = '478', bActive = false;
+        let bInterval = null, bPhaseStart = 0;
+        const bParams = {
+            '478': { in: 4, hold: 7, out: 8, hold2: 0, text: 'Inhale 4s · Hold 7s · Exhale 8s' },
+            'box': { in: 4, hold: 4, out: 4, hold2: 4, text: 'Inhale 4s · Hold 4s · Exhale 4s · Hold 4s' },
+            'simple': { in: 4, hold: 0, out: 4, hold2: 0, text: 'Inhale 4s · Exhale 4s' }
+        };
+
+        function openBreath(tab = 'breath') {
+            document.getElementById('breath-modal').classList.add('on');
+            switchBreathTab(tab);
+        }
+
+        function closeBreath() {
+            document.getElementById('breath-modal').classList.remove('on');
+            stopBreathing();
+            resetGrounding();
+        }
+
+        function switchBreathTab(t) {
+            bMode = t;
+            document.querySelectorAll('.bm-tab').forEach(e => e.classList.remove('on'));
+            document.getElementById('tab-' + t).classList.add('on');
+            document.getElementById('breath-pane').classList.toggle('hide', t !== 'breath');
+            document.getElementById('ground-pane').classList.toggle('hide', t !== 'ground');
+            if (t === 'breath' && bActive) stopBreathing();
+        }
+
+        function setTech(tech, el) {
+            if (bActive) return;
+            bTech = tech;
+            document.querySelectorAll('.bt-opt').forEach(e => e.classList.remove('on'));
+            el.classList.add('on');
+            document.getElementById('breath-cycle-info').textContent = bParams[tech].text;
+            
+            // set css variables for animation speeds
+            const r = document.getElementById('breath-ring');
+            r.style.setProperty('--breath-in', bParams[tech].in + 's');
+            r.style.setProperty('--breath-out', bParams[tech].out + 's');
+        }
+
+        function toggleBreathing() {
+            const btn = document.getElementById('breath-start-btn');
+            if (bActive) {
+                stopBreathing();
+            } else {
+                bActive = true;
+                btn.textContent = '⏹ Stop';
+                btn.style.background = 'var(--rdl)';
+                btn.style.color = 'var(--rd)';
+                btn.style.border = '1px solid var(--rd)';
+                runBreathingCycle();
+            }
+        }
+
+        function stopBreathing() {
+            bActive = false;
+            clearTimeout(bInterval);
+            const btn = document.getElementById('breath-start-btn');
+            btn.textContent = '▶ Start';
+            btn.style.background = 'var(--tl)';
+            btn.style.color = '#071810';
+            btn.style.border = 'none';
+            
+            const r = document.getElementById('breath-ring');
+            r.className = 'breath-ring';
+            document.getElementById('breath-phase').textContent = 'Ready';
+            document.getElementById('breath-phase').className = 'breath-phase';
+            document.getElementById('breath-count').textContent = '—';
+        }
+
+        function runBreathingCycle() {
+            if (!bActive) return;
+            const p = bParams[bTech];
+            const r = document.getElementById('breath-ring');
+            const ph = document.getElementById('breath-phase');
+            const c = document.getElementById('breath-count');
+            
+            // Phase 1: Inhale
+            r.className = 'breath-ring inhale';
+            ph.textContent = 'Inhale';
+            ph.className = 'breath-phase';
+            countdown(p.in, c, () => {
+                if (!bActive) return;
+                // Phase 2: Hold
+                if (p.hold > 0) {
+                    r.className = 'breath-ring hold';
+                    ph.textContent = 'Hold';
+                    ph.className = 'breath-phase hold-color';
+                    countdown(p.hold, c, doExhale);
+                } else doExhale();
+            });
+
+            function doExhale() {
+                if (!bActive) return;
+                // Phase 3: Exhale
+                r.className = 'breath-ring exhale';
+                ph.textContent = 'Exhale';
+                ph.className = 'breath-phase exhale-color';
+                countdown(p.out, c, () => {
+                    if (!bActive) return;
+                    // Phase 4: Hold 2 (Box breathing only)
+                    if (p.hold2 > 0) {
+                        r.className = 'breath-ring hold';
+                        ph.textContent = 'Hold';
+                        ph.className = 'breath-phase hold-color';
+                        countdown(p.hold2, c, runBreathingCycle);
+                    } else runBreathingCycle();
+                });
+            }
+        }
+
+        function countdown(secs, el, callback) {
+            let left = secs;
+            el.textContent = left;
+            const tick = setInterval(() => {
+                if (!bActive) { clearInterval(tick); return; }
+                left--;
+                if (left > 0) {
+                    el.textContent = left;
+                } else {
+                    clearInterval(tick);
+                    callback();
+                }
+            }, 1000);
+            // register to bInterval to be able to clear it on stop
+            bInterval = tick;
+        }
+
+        let curGround = 0;
+        function nextGround(idx) {
+            document.getElementById('gs-' + idx).classList.remove('active');
+            document.getElementById('gs-' + idx).classList.add('done');
+            if (idx < 4) {
+                curGround = idx + 1;
+                document.getElementById('gs-' + curGround).classList.add('active');
+                // scroll into view
+                setTimeout(() => {
+                    const el = document.getElementById('gs-' + curGround);
+                    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    el.querySelector('textarea').focus();
+                }, 200);
+            } else {
+                document.getElementById('ground-done').classList.add('on');
+                setTimeout(() => {
+                    document.getElementById('ground-done').scrollIntoView({ behavior: 'smooth', block: 'end' });
+                }, 200);
+            }
+        }
+
+        function resetGrounding() {
+            curGround = 0;
+            for (let i = 0; i <= 4; i++) {
+                const s = document.getElementById('gs-' + i);
+                s.classList.remove('active', 'done');
+                if (i === 0) s.classList.add('active');
+                s.querySelector('textarea').value = '';
+            }
+            document.getElementById('ground-done').classList.remove('on');
+        }
+
     </script>
 
 </body>
